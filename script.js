@@ -192,14 +192,14 @@ function generatePDF() {
     setTimeout(() => {
         // Настройка кастомного размера страницы в PDF
         const options = {
-            margin: 0, // Без полей
-            filename: `${document.getElementById("char-name-page").innerText}.pdf`, // Имя файла PDF
-            image: { type: 'png', quality: 0.98 }, // Качество изображения
-            html2canvas: { scale: 2 }, // Масштаб для лучшего качества
+            margin: 0,
+            filename: `${document.getElementById("char-name-page").innerText}.pdf`,
+            image: { type: 'jpeg', quality: 0.75 }, // Уменьшаем качество до 0.75 или ниже
+            html2canvas: { scale: 1.5 }, // Масштаб для уменьшения резкости
             jsPDF: {
-                unit: 'px', // Используем пиксели как единицу измерения
-                format: [1750, 1240], // Кастомный размер страницы
-                orientation: 'landscape' // Ориентация (можно использовать 'landscape' для горизонтальной)
+                unit: 'px',
+                format: [1750, 1240],
+                orientation: 'landscape'
             }
         };
 
