@@ -141,48 +141,24 @@ async function requestTrait (trait_index) {
 
 
 function generatePDF() {
-    console.log("Начинаем генерацию PDF");
-
     const pdfContent = document.getElementById('pdf-content');
     
-    if (!pdfContent) {
-        console.error("Элемент для PDF не найден");
-        return;
-    }
-    
-    // Убираем все изображения перед генерацией PDF
-    const images = pdfContent.querySelectorAll('img');
-    images.forEach(img => {
-        console.log("Скрываем изображение:", img.src);
-        img.style.display = 'none'; // Скрываем изображения
-    });
+    // Настройка кастомного размера страницы в PDF
+    const options = {
+        margin: 0, // Без полей
+        filename: 'my-custom-size-pdf.pdf', // Имя файла PDF
+        image: { type: 'jpeg', quality: 0.98 }, // Качество изображения
+        html2canvas: { scale: 2 }, // Масштаб для лучшего качества
+        jsPDF: {
+            unit: 'px', // Используем пиксели как единицу измерения
+            format: [1750, 1240], // Кастомный размер страницы
+            orientation: 'portrait' // Ориентация (можно использовать 'landscape' для горизонтальной)
+        }
+    };
 
-    pdfContent.style.display = 'block'; // Показываем контент для генерации PDF
-
-    // Генерируем PDF с опцией CORS
-    html2pdf().set({
-        html2canvas: {
-            useCORS: true,  // Включаем поддержку CORS для изображений
-            allowTaint: false  // Отключаем возможность загрязнения canvas
-        },
-        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-    }).from(pdfContent).save()
-        .then(() => {
-            console.log("PDF успешно сгенерирован!");
-        })
-        .catch((error) => {
-            console.error("Ошибка при генерации PDF:", error);
-        })
-        .finally(() => {
-            // Восстанавливаем изображения после генерации PDF
-            images.forEach(img => {
-                img.style.display = ''; // Показываем изображения обратно
-            });
-            pdfContent.style.display = 'none'; // Скрываем контент после генерации
-            console.log("PDF генерация завершена (с ошибкой или без)");
-        });
+    // Генерация PDF
+    html2pdf().set(options).from(pdfContent).save();
 }
-
 
 
 
