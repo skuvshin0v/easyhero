@@ -161,7 +161,6 @@ function updateNumbers () {
 
 }
 
-
 function generatePDF() {
     // Проверка на заполненность полей
     const requiredFields = document.querySelectorAll('.required'); // Находим все поля с классом 'required'
@@ -185,22 +184,36 @@ function generatePDF() {
     // Если все поля заполнены, продолжаем генерацию PDF
     updatePDF();
     const pdfContent = document.getElementById('pdf-content');
-    
-    // Настройка кастомного размера страницы в PDF
-    const options = {
-        margin: 0, // Без полей
-        filename: `${document.getElementById("char-name-page").innerText}.pdf`, // Имя файла PDF
-        image: { type: 'png', quality: 0.98 }, // Качество изображения
-        html2canvas: { scale: 2 }, // Масштаб для лучшего качества
-        jsPDF: {
-            unit: 'px', // Используем пиксели как единицу измерения
-            format: [1750, 1240], // Кастомный размер страницы
-            orientation: 'landscape' // Ориентация (можно использовать 'landscape' для горизонтальной)
-        }
-    };
 
-    // Генерация PDF
-    html2pdf().set(options).from(pdfContent).save();
+    // Временно отображаем элемент для генерации PDF
+    pdfContent.style.display = "block";
+
+    // Убедимся, что контент загружен и подготовлен перед генерацией PDF
+    setTimeout(() => {
+        // Настройка кастомного размера страницы в PDF
+        const options = {
+            margin: 0, // Без полей
+            filename: `${document.getElementById("char-name-page").innerText}.pdf`, // Имя файла PDF
+            image: { type: 'png', quality: 0.98 }, // Качество изображения
+            html2canvas: { scale: 2 }, // Масштаб для лучшего качества
+            jsPDF: {
+                unit: 'px', // Используем пиксели как единицу измерения
+                format: [1750, 1240], // Кастомный размер страницы
+                orientation: 'landscape' // Ориентация (можно использовать 'landscape' для горизонтальной)
+            }
+        };
+
+        // Генерация PDF
+        html2pdf().set(options).from(pdfContent).save().then(() => {
+            // Скрываем элемент обратно после генерации PDF
+            pdfContent.style.display = "none";
+        }).catch((error) => {
+            console.error("Ошибка при генерации PDF:", error);
+            // Скрываем элемент даже в случае ошибки
+            pdfContent.style.display = "none";
+        });
+
+    }, 500); // Небольшая задержка на 500 мс, чтобы убедиться, что все ресурсы загружены
 }
 
 // Функция для удаления красной рамки при заполнении поля
