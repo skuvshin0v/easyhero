@@ -1,0 +1,358 @@
+@import url(https://fonts.googleapis.com/css?family=Marck+Script);
+@import url(https://fonts.googleapis.com/css?family=Oswald);
+
+
+.general {
+    grid-area: general;
+}
+
+.general-container {
+    display: grid;
+    grid-template-rows: 1fr 2fr;
+    grid-template-columns: 1fr 1fr 1fr;
+
+}
+
+
+
+
+
+
+.abilities {
+    grid-area: abilities;
+
+}
+
+.ab-header, .stat-header{
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.ab-value, .stat-value{
+    font-size: 25px;
+    text-align: center;
+}
+
+
+.weapons {
+    grid-area: weapons;
+}
+
+
+.inventory {
+    grid-area: inventory;
+}
+
+.specials {
+    grid-area: specials;
+}
+
+.ab-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.ability {
+    justify-content: center;
+    width: 150px;
+    display: grid;
+    grid-template-areas: 
+    "ab-header ab-header"
+    "ab-value ab-value"
+    "ab-value ab-value"
+    "add substract"
+    "saving-throw saving-throw"
+    "skill-list skill-list";
+
+}
+
+/* .ability {
+    width: auto;
+    display: grid;
+    grid-template-areas: 
+    "ab-value ab-value ab-value"
+    "ab-value ab-value ab-value"
+    "ab-header ab-header ab-header"
+    "add . substract"
+    "saving-throw saving-throw saving-throw"
+    "skill-list skill-list skill-list";
+
+} */
+
+
+.ab-header {
+    grid-area: ab-header;
+}
+
+.ab-value {
+    grid-area: ab-value;
+}
+
+.add {
+    grid-area: add ;
+}
+
+.substract {
+    grid-area: substract;
+}
+
+.add,.substract {
+    background-color: rgba(250, 235, 215, 0.838);
+    width: 50px;
+    margin: 5px;
+}
+
+.add:hover, .substract:hover{
+    background-color: rgb(251, 218, 174);
+}
+.add,.substract:focus {
+    outline-color: orange;
+}   
+
+.add:active,.substract:active{
+    box-shadow: 0 1px 5px rgb(0 0 0 / 0.2);
+    transform: scale(0.98);
+    background-color: orange;;
+}
+
+.skill-list {
+    grid-area: skill-list;
+    list-style-type: none;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-inline-start: 0px;
+    border: 5px;
+    border-style: solid;
+    border-color: brown;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 125px;
+}
+
+
+.saving-throw {
+    grid-area: saving-throw;
+    height: 20px;
+    font-size: 15px;
+    margin-bottom: 0px;
+}
+
+.builder {
+    display: grid;
+    grid-template-areas:
+    "general abilities"
+    "weapons specials"
+    "inventory inventory";
+}
+
+/* body{
+    background-image: url(https://cdnb.artstation.com/p/assets/images/images/005/611/921/large/carlos-ruiz-cr-big.jpg?1492453424);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;  
+} */
+
+main {
+    background-color: bisque;
+    padding: 10px;
+}
+
+h1 {
+    color: rgb(0, 0, 0);
+    text-align: center;
+}
+
+.section-header{
+    font-weight: bold;
+    font-size: 25px;
+}
+
+
+/* Страница-картчока для экспорта */
+
+.page {
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: white;
+    /* background-image: url(img/bg.jpg); */
+    /* background-image: url(img/bg2.png); */
+    /* background-image: url(img/bg3.jpg); */
+    background-image: url(img/bg4.jpg);
+    font-family:'Oswald';
+    width: 1750px;
+    height: 1240px;
+}
+
+.page-header {
+    grid-area: page-header;
+
+}
+
+.page-header h2 {
+    font-family: 'Marck Script';
+    font-size: 60px;
+    text-align: center;
+    margin: 20px;
+}
+
+
+#first-page {
+    display: grid;
+    grid-template-areas:
+    "page-header page-header page-header "
+    "stats-container-page stats-container-page stats-container-page"
+    "specials-container-page specials-container-page  weapons-container-page "
+    "specials-container-page specials-container-page inventory-container-page";
+    grid-template-rows: 100px 200px auto auto;
+    gap: 10px 20px;
+    height: calc(100vh - 10px);
+
+
+}
+
+
+.stats-container-page {
+    grid-area: stats-container-page;
+    display: grid;
+    grid-template-areas: "abilities abilities health-and-armor ";
+    gap: 10px 20px;
+}
+
+
+.text-container-page {
+    padding: 10px;
+    border: solid;
+    border-width: 5px;
+    border-radius: 10px;
+}
+
+.container-page-header {
+    margin-top: 5px;
+
+}
+
+.specials-container-page {
+    grid-area: specials-container-page;
+
+}
+
+.weapons-container-page {
+    grid-area: weapons-container-page;
+}
+
+.inventory-container-page {
+    grid-area: inventory-container-page;
+}
+
+.ab-container-page {
+    grid-area: abilities;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.health-and-armor-container-page {
+    grid-area: health-and-armor;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+}
+
+.element-header-page {
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.element-container-page {
+    height: 100px;
+    align-items: center;
+    text-align: center;
+    margin: 5px;
+}
+
+.element-value-page {
+    background-image: url(img/award.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height: 150px;
+    width: 150px;
+    position:relative;
+    place-self: center;
+    line-height: 160px;
+    font-size: 45px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+
+}
+
+#arm-value {
+    background-image: url(img/shield.png);
+    line-height: 145px;
+    color: white;  
+}
+
+#hits-value {
+    background-image: url(img/like.png);
+    line-height: 145px;
+    color: white;
+}
+
+#cur-hits-value {
+    background-image: url(img/like2.png);
+}
+
+/* Second page */
+#second-page {
+    display: grid;
+    grid-template-areas:
+    "image description";
+    grid-template-columns: 1fr 1fr;
+}
+
+#image-on-page {
+    grid-area: image;
+    margin-left: 0px;
+    margin-right: 100px;
+}
+
+#description-on-page {
+    grid-area: description;
+}
+
+/* Адаптивная верстка */
+
+@media (max-width: 768px) {
+    .builder {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+      "general"
+      "abilities"
+      "skills"
+      "weapons"
+      "inventory"
+      "specials";
+
+    }
+  }
+
+@media (max-width: 768px) {
+    .abilities {
+        display: flex;
+        flex-direction: column;
+
+    }
+  }
+
+@media (max-width: 768px) {
+    .general-container {
+        display: grid;
+        grid-template-rows: 1fr;
+        grid-template-columns: 1fr 1fr;
+
+}}
