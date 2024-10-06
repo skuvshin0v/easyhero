@@ -83,6 +83,8 @@ function updateData () {
     checkRules ()
     updateNumbers ()
     updateHealth ()
+    removeRedOutlineOnInput();
+    updatePDF () // Потом убрать??
 }
 
 
@@ -141,18 +143,19 @@ async function requestTrait (trait_index) {
 
 
 function generatePDF() {
+    updatePDF ()
     const pdfContent = document.getElementById('pdf-content');
     
     // Настройка кастомного размера страницы в PDF
     const options = {
         margin: 0, // Без полей
-        filename: 'my-custom-size-pdf.pdf', // Имя файла PDF
-        image: { type: 'jpeg', quality: 0.98 }, // Качество изображения
+        filename: `${document.getElementById("char-name-page").innerText}.pdf`, // Имя файла PDF
+        image: { type: 'png', quality: 0.98 }, // Качество изображения
         html2canvas: { scale: 2 }, // Масштаб для лучшего качества
         jsPDF: {
             unit: 'px', // Используем пиксели как единицу измерения
             format: [1750, 1240], // Кастомный размер страницы
-            orientation: 'portrait' // Ориентация (можно использовать 'landscape' для горизонтальной)
+            orientation: 'landscape' // Ориентация (можно использовать 'landscape' для горизонтальной)
         }
     };
 
@@ -185,6 +188,59 @@ function updateNumbers () {
 }
 
 
+function generatePDF() {
+    // Проверка на заполненность полей
+    const requiredFields = document.querySelectorAll('.required'); // Находим все поля с классом 'required'
+    let allFieldsValid = true; // Флаг для проверки заполненности всех полей
+
+    requiredFields.forEach(field => {
+        if (field.value.trim() === '') { // Если поле пустое
+            field.style.border = '2px solid red'; // Подсвечиваем красным
+            allFieldsValid = false; // Устанавливаем флаг, что есть незаполненные поля
+        } else {
+            field.style.border = ''; // Убираем красную рамку, если поле заполнено
+        }
+    });
+
+    // Если есть незаполненные поля, отменяем генерацию PDF
+    if (!allFieldsValid) {
+        alert("Please fill out all required fields!"); // Предупреждение пользователю
+        return; // Прекращаем выполнение функции
+    }
+
+    // Если все поля заполнены, продолжаем генерацию PDF
+    updatePDF();
+    const pdfContent = document.getElementById('pdf-content');
+    
+    // Настройка кастомного размера страницы в PDF
+    const options = {
+        margin: 0, // Без полей
+        filename: 'my-custom-size-pdf.pdf', // Имя файла PDF
+        image: { type: 'jpeg', quality: 0.98 }, // Качество изображения
+        html2canvas: { scale: 2 }, // Масштаб для лучшего качества
+        jsPDF: {
+            unit: 'px', // Используем пиксели как единицу измерения
+            format: [1750, 1240], // Кастомный размер страницы
+            orientation: 'portrait' // Ориентация (можно использовать 'landscape' для горизонтальной)
+        }
+    };
+
+    // Генерация PDF
+    html2pdf().set(options).from(pdfContent).save();
+}
+
+// Функция для удаления красной рамки при заполнении поля
+function removeRedOutlineOnInput() {
+    const requiredFields = document.querySelectorAll('.required');
+    requiredFields.forEach(field => {
+        field.addEventListener('input', function() {
+            if (field.value.trim() !== '') {
+                field.style.border = ''; // Убираем красную рамку, если поле заполнено
+            }
+        });
+    });
+}
+
 
 // Проверяет соблюдение правил по лимитам на значение модификатора характеристики
 
@@ -198,6 +254,24 @@ function checkLimit (char, char_bon) {
     } else {
          return calculateAbilityBonus(char + char_bon)
     }
+}
+
+
+function updatePDF () {
+    document.getElementById("char-name-page").innerText =
+    `${document.getElementById("char-name").value}, ${document.getElementById("race").options[document.getElementById("race").selectedIndex].text}-${document.getElementById("class").options[document.getElementById("class").selectedIndex].text}`;
+    document.getElementById("str-page").innerText = document.getElementById("str").innerText;
+    document.getElementById("dex-page").innerText = document.getElementById("dex").innerText;
+    document.getElementById("con-page").innerText = document.getElementById("con").innerText;
+    document.getElementById("int-page").innerText = document.getElementById("int").innerText;
+    document.getElementById("wis-page").innerText = document.getElementById("wis").innerText;
+    document.getElementById("cha-page").innerText = document.getElementById("cha").innerText;
+
+    document.getElementById("hits-value").innerText = document.getElementById("hits").innerText;
+    document.getElementById("arm-value").innerText = document.getElementById("armor-value").innerText;
+
+    
+
 }
 
 

@@ -2,16 +2,38 @@
 @import url(https://fonts.googleapis.com/css?family=Oswald);
 
 
+/* Apply box-sizing to all elements */
+* {
+    box-sizing: border-box;
+  }
+  
+  /* Also apply it to the before and after pseudo-elements */
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+
+
 .general {
     grid-area: general;
 }
 
 .general-container {
     display: grid;
-    grid-template-rows: 1fr 2fr;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
 
 }
+
+textarea {
+    width: 100%;  /* Full width */
+    height: 100px;  /* Fixed height */
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;  /* Ensures padding doesn’t affect width */
+    resize: none;
+  }
 
 
 
@@ -67,6 +89,10 @@
     "saving-throw saving-throw"
     "skill-list skill-list";
 
+}
+
+#save-pdf {
+    color: red;
 }
 
 /* .ability {
@@ -130,6 +156,7 @@
     margin-top: 5px;
     margin-bottom: 5px;
     height: 125px;
+    display: none;
 }
 
 
@@ -186,6 +213,10 @@ h1 {
     height: 1240px;
 }
 
+/* #pdf-content {
+    display: none;
+} */
+
 .page-header {
     grid-area: page-header;
 
@@ -208,7 +239,7 @@ h1 {
     "specials-container-page specials-container-page inventory-container-page";
     grid-template-rows: 100px 200px auto auto;
     gap: 10px 20px;
-    height: calc(100vh - 10px);
+    height: 1240px;
 
 
 }
@@ -313,6 +344,7 @@ h1 {
     grid-template-areas:
     "image description";
     grid-template-columns: 1fr 1fr;
+    height: 1240px;
 }
 
 #image-on-page {
@@ -353,6 +385,6 @@ h1 {
     .general-container {
         display: grid;
         grid-template-rows: 1fr;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
 
 }}
