@@ -213,9 +213,9 @@ h1 {
     height: 1240px;
 }
 
-/* #pdf-content {
+#pdf-content {
     display: none;
-} */
+}
 
 .page-header {
     grid-area: page-header;

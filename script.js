@@ -141,32 +141,6 @@ async function requestTrait (trait_index) {
 }
 
 
-
-function generatePDF() {
-    updatePDF ()
-    const pdfContent = document.getElementById('pdf-content');
-    
-    // Настройка кастомного размера страницы в PDF
-    const options = {
-        margin: 0, // Без полей
-        filename: `${document.getElementById("char-name-page").innerText}.pdf`, // Имя файла PDF
-        image: { type: 'png', quality: 0.98 }, // Качество изображения
-        html2canvas: { scale: 2 }, // Масштаб для лучшего качества
-        jsPDF: {
-            unit: 'px', // Используем пиксели как единицу измерения
-            format: [1750, 1240], // Кастомный размер страницы
-            orientation: 'landscape' // Ориентация (можно использовать 'landscape' для горизонтальной)
-        }
-    };
-
-    // Генерация PDF
-    html2pdf().set(options).from(pdfContent).save();
-}
-
-
-
-
-
 // Функция для преобразования модификаторов в нужный формат
 function updateNumbers () {
     const numberFields = document.querySelectorAll('.ab-value');
@@ -215,13 +189,13 @@ function generatePDF() {
     // Настройка кастомного размера страницы в PDF
     const options = {
         margin: 0, // Без полей
-        filename: 'my-custom-size-pdf.pdf', // Имя файла PDF
-        image: { type: 'jpeg', quality: 0.98 }, // Качество изображения
+        filename: `${document.getElementById("char-name-page").innerText}.pdf`, // Имя файла PDF
+        image: { type: 'png', quality: 0.98 }, // Качество изображения
         html2canvas: { scale: 2 }, // Масштаб для лучшего качества
         jsPDF: {
             unit: 'px', // Используем пиксели как единицу измерения
             format: [1750, 1240], // Кастомный размер страницы
-            orientation: 'portrait' // Ориентация (можно использовать 'landscape' для горизонтальной)
+            orientation: 'landscape' // Ориентация (можно использовать 'landscape' для горизонтальной)
         }
     };
 
