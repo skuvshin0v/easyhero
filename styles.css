@@ -1,11 +1,15 @@
 @import url(https://fonts.googleapis.com/css?family=Marck+Script);
 @import url(https://fonts.googleapis.com/css?family=Oswald);
-
+@import url(https://fonts.googleapis.com/css?family=Roboto);
 
 /* Apply box-sizing to all elements */
 * {
     box-sizing: border-box;
   }
+
+p {
+    font-family: 'Roboto';
+}
   
   /* Also apply it to the before and after pseudo-elements */
   *::before,
@@ -14,35 +18,220 @@
   }
 
 
+.description {
+    display: none;
+}
+
 .general {
     grid-area: general;
+    /* border-width: 3px;
+    border-style: solid;
+    padding: 10px; */
 }
+
+
+#char-name {
+    outline:#4D3F37;
+    font-size: 15px;
+    width: 100%;
+    line-height: 25px;
+    border-radius: 5px;
+    border: 1px solid #4D3F37 ;
+    background: transparent;
+    padding: 5px;
+
+}
+
+#char-name:focus {
+    outline-style: solid;
+    outline-width: 2px;
+    outline-color: #CC5803;
+}
+
+.char-name {
+    grid-area: char-name;
+}
+
+.input-label {
+    color: #1A1512;
+    font-family: 'Roboto';
+    font-weight: bold;
+
+}
+
+
+
+.char-img {
+    grid-area: char-img;
+    align-content: end;
+}
+
+#char-img {
+    display: none;
+}
+
+.img-label {
+    font-family: 'Roboto';
+    display: inline-block;
+    text-transform: uppercase;
+    color: #F9E8DE;
+    background: #CC5803;
+    text-align: center;
+    padding: 10px 5px;
+    font-size: 15px;
+    user-select: none;
+    cursor: pointer;
+    border-radius: 10px;
+    width: 100%;
+    height: 37px;
+}
+
+.img-label:hover {
+    opacity: 90%;
+}
+
+.img-label:active {
+    transform: scale(0.9);
+}
+
+/* .img-label::after {
+    background: #4D3F37;
+} */
+
+.race {
+    grid-area: race;
+
+}
+
+
+#race {
+    height: 50px;
+    background: #F9E8DE;
+    font-family: 'Roboto';
+    font-size: 15px;
+    align-self: flex-end;
+    width: 100%;
+}
+
+#race:focus {
+    outline-style: solid;
+    outline-width: 2px;
+    outline-color: #CC5803;
+}
+
+.class {
+    grid-area: class;
+
+}
+
+#class {
+    height: 50px;
+    background: #F9E8DE;
+    font-family: 'Roboto';
+    font-size: 15px;
+    align-self: flex-end;
+    width: 100%;
+}
+
+#class:focus {
+    outline-style: solid;
+    outline-width: 2px;
+    outline-color: #CC5803;
+}
+
+
+#char-story {
+    font-family: 'Roboto';
+    width: 100%;  /* Full width */
+    height: 130px;  /* Fixed height */
+    font-size: 15px;
+    box-sizing: border-box;  /* Ensures padding doesn’t affect width */
+    resize: none;
+    border-radius: 5px;
+    border: 1px solid #4D3F37 ;
+    background: transparent;
+    padding: 5px;
+    margin-bottom: -5px;
+}
+#char-story:focus {
+    outline-style: solid;
+    outline-width: 2px;
+    outline-color: #CC5803;
+}
+
+.char-story {
+    grid-area: char-story;
+}
+
+.input-story-label {
+    color: #1A1512;
+    font-family: 'Roboto';
+    font-weight: bold;
+}
+
+
+#health {
+    grid-area: health;
+}
+
+#armor {
+    grid-area: armor;
+}
+
+#save-pdf {
+    grid-area: save-pdf;
+
+    display: inline-block;
+    text-transform: uppercase;
+    color: #F9E8DE;
+    background: #CC5803;
+    text-align: center;
+    padding: 10px 5px;
+    font-size: 15px;
+    user-select: none;
+    cursor: pointer;
+    border-radius: 10px;
+    width: 100%;
+    height: 37px;
+    border-style: none;
+    font-family: 'Roboto';
+
+}
+
+#save-pdf:hover {
+    opacity: 90%;
+}
+
+#save-pdf:active {
+    transform: scale(0.9);
+}
+
+
 
 .general-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+    "char-name  char-name char-img "
+    "char-story char-story race"
+    "char-story char-story class"
+    "health armor save-pdf";
+    row-gap: 5px;
+    column-gap: 5px;
 
 }
-
-textarea {
-    width: 100%;  /* Full width */
-    height: 100px;  /* Fixed height */
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;  /* Ensures padding doesn’t affect width */
-    resize: none;
-  }
-
-
-
-
 
 
 .abilities {
     grid-area: abilities;
+    /* border-style: solid;
+    border-width: 3px;
+    border-color: red; */
 
+
+}
+
+.stat-header{
+    margin-top: 0px;
 }
 
 .ab-header, .stat-header{
@@ -91,22 +280,7 @@ textarea {
 
 }
 
-#save-pdf {
-    color: red;
-}
 
-/* .ability {
-    width: auto;
-    display: grid;
-    grid-template-areas: 
-    "ab-value ab-value ab-value"
-    "ab-value ab-value ab-value"
-    "ab-header ab-header ab-header"
-    "add . substract"
-    "saving-throw saving-throw saving-throw"
-    "skill-list skill-list skill-list";
-
-} */
 
 
 .ab-header {
@@ -126,22 +300,22 @@ textarea {
 }
 
 .add,.substract {
-    background-color: rgba(250, 235, 215, 0.838);
+    background-color: #F9E8DE;
     width: 50px;
     margin: 5px;
 }
 
 .add:hover, .substract:hover{
-    background-color: rgb(251, 218, 174);
+    background-color: #f6cab0;
 }
 .add,.substract:focus {
-    outline-color: orange;
+    outline-color: #CC5803;
 }   
 
 .add:active,.substract:active{
     box-shadow: 0 1px 5px rgb(0 0 0 / 0.2);
     transform: scale(0.98);
-    background-color: orange;;
+    background-color: #CC5803;
 }
 
 .skill-list {
@@ -173,6 +347,8 @@ textarea {
     "general abilities"
     "weapons specials"
     "inventory inventory";
+    row-gap: 10px;
+    column-gap: 10px;
 }
 
 
@@ -240,18 +416,15 @@ body {
 
 }
 
-/* #menu-label {
-    justify-content: center
-} */
 
 .menubtn {
     line-height: 80px;
-    margin-right: 40px;
+    margin-right: 10px;
     cursor: pointer;
     display: none;
-    justify-self: center
 
 }
+
 
 @media (max-width:1200px) {
     .navbar-list a {
@@ -266,7 +439,7 @@ body {
 }
 
 
-@media (max-width:858px) {
+@media (max-width:874px) {
     .menubtn {
         display: block;
     }
@@ -306,8 +479,11 @@ h1 {
 }
 
 .section-header{
+    font-family: "Oswald";
+    color: #1A1512;
     font-weight: bold;
     font-size: 25px;
+    margin-bottom: 10px;
 }
 
 
@@ -317,9 +493,6 @@ h1 {
     padding: 15px;
     margin-bottom: 0px;
     background-color: white;
-    /* background-image: url(img/bg.jpg); */
-    /* background-image: url(img/bg2.png); */
-    /* background-image: url(img/bg3.jpg); */
     background-image: url(img/bg4.jpg);
     font-family:'Oswald';
     width: 1750px;
@@ -478,15 +651,13 @@ h1 {
       grid-template-areas:
       "general"
       "abilities"
-      "skills"
+      "specials"
       "weapons"
-      "inventory"
-      "specials";
-
+      "inventory";
     }
   }
 
-@media (max-width: 768px) {
+@media (max-width: 874px) {
     .abilities {
         display: flex;
         flex-direction: column;
@@ -494,10 +665,15 @@ h1 {
     }
   }
 
-@media (max-width: 768px) {
+@media (max-width: 874px) {
     .general-container {
         display: grid;
-        grid-template-rows: 1fr;
-        grid-template-columns: 1fr;
+        grid-template-areas:
+        "char-name char-name"
+        "char-img char-img"
+        "race class"
+        "char-story char-story"
+        "health armor"
+        "save-pdf save-pdf";
 
 }}

@@ -168,7 +168,7 @@ function generatePDF() {
 
     requiredFields.forEach(field => {
         if (field.value.trim() === '') { // Если поле пустое
-            field.style.border = '2px solid red'; // Подсвечиваем красным
+            field.style.outline = '2px solid #CC5803'; // Подсвечиваем красным
             allFieldsValid = false; // Устанавливаем флаг, что есть незаполненные поля
         } else {
             field.style.border = ''; // Убираем красную рамку, если поле заполнено
@@ -222,7 +222,7 @@ function removeRedOutlineOnInput() {
     requiredFields.forEach(field => {
         field.addEventListener('input', function() {
             if (field.value.trim() !== '') {
-                field.style.border = ''; // Убираем красную рамку, если поле заполнено
+                field.style.outline = ''; // Убираем красную рамку, если поле заполнено
             }
         });
     });
