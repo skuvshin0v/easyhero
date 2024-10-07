@@ -18,6 +18,10 @@ p {
   }
 
 
+  #pdf-content {
+    display: none;
+} 
+
 .description {
     display: none;
 }
@@ -111,6 +115,8 @@ p {
     font-size: 15px;
     align-self: flex-end;
     width: 100%;
+    border-radius: 5px;
+    border-color: #4D3F37;
 }
 
 #race:focus {
@@ -131,6 +137,8 @@ p {
     font-size: 15px;
     align-self: flex-end;
     width: 100%;
+    border-radius: 5px;
+    border-color: #4D3F37;
 }
 
 #class:focus {
@@ -499,9 +507,6 @@ h1 {
     height: 1240px;
 }
 
-#pdf-content {
-    display: none;
-}
 
 .page-header {
     grid-area: page-header;
