@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="img/favicon-light 150.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Создай персонажа</title>
     <link rel="stylesheet" href="styles.css">
@@ -9,7 +10,28 @@
 </head>
 <body>
     <header>
-        <h1>Это сервис для упрощенного создания персонажа для D&D 5e</h1>
+        <nav class="navbar">
+            <div class="logo-div">
+                <a href="#" class="logo">
+                    <img class="logo-image" src="img/favicon-light.png" alt="logo" width="50px" height="50px">
+                    <h1>EasyHero</h1>
+                </a>
+            </div>
+            <input type="checkbox" id="menu-check" style="display: none;">
+            <label for="menu-check" id="menu-label">
+                <img src="img/menu.png" width="25px" height="25px" class="menubtn">
+                </label>
+
+            <ul class="navbar-list">
+                <li> <a href="#" class="active">Создать персонажа</a></li>
+                <li> <a href="#">Готовые персонажи</a></li>
+                <li> <a href="#">Для мастера</a></li>
+                <li> <a href="#">Поддержать</a></li>
+                <li> <a href="#">Контакты</a></li>
+
+            </ul>
+
+        </nav>
     </header>
     <main>
         <section class="description">

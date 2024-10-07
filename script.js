@@ -194,11 +194,11 @@ function generatePDF() {
         const options = {
             margin: 0,
             filename: `${document.getElementById("char-name-page").innerText}.pdf`,
-            image: { type: 'jpeg', quality: 0.75 }, // Уменьшаем качество до 0.75 или ниже
-            html2canvas: { scale: 1.5 }, // Масштаб для уменьшения резкости
+            image: { type: 'jpeg', quality: 0.75 }, // Уменьшаем качество изображения
+            html2canvas: { scale: 1 }, // Уменьшаем масштаб для меньшего разрешения
             jsPDF: {
                 unit: 'px',
-                format: [1750, 1240],
+                format: [1000, 707], // Уменьшаем размер страницы (A4 в пикселях, но меньше)
                 orientation: 'landscape'
             }
         };
