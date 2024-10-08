@@ -69,6 +69,150 @@ let health = null
 let armor = null
 
 
+const trait_list = [
+    {
+        id: "brave",
+        trait_name: "Храбрый",
+        trait_description: 'Вы совершаете с преимуществом спасброски от запугивания и состояния «испуганный»'
+    },
+    {
+        id: "darkvision",
+        trait_name: "Тёмное зрение",
+        trait_description: "Увеличивает радиус видимости в темноте до 60 фт"
+    },
+    {
+        id: "dwarven-resilience",
+        trait_name: "Дварфийская устойчивость",
+        trait_description: "Вы совершаете с преимуществом спасброски от яда и получаете сопротивление урону ядом"
+    },
+    {
+        id: "fey-ancestry",
+        trait_name: "Наследие фей",
+        trait_description: "Вы совершаете с преимуществом спасброски от состояния «очарованный», вас невозможно магически усыпить"
+    },
+    {
+        id: "gnome-cunning",
+        trait_name: "Гномья хитрость",
+        trait_description: "Вы совершаете с преимуществом спасброски Интеллекта, Мудрости и Харизмы против магии"
+    },
+    {
+        id: "halfling-nimbleness",
+        trait_name: "Проворство полурослика",
+        trait_description: "Вы можете проходить сквозь пространство, занятое существами, чей размер больше вашего"
+    },
+    {
+        id: "keen-senses",
+        trait_name: "Острые чувства",
+        trait_description: "Вы совершаете с преимуществом проверки Внимания"
+    },
+    {
+        id: "lucky",
+        trait_name: "Удача полурослика",
+        trait_description: "Если при броске у вас выпало «1», вы можете перебросить кость, и должны использовать новый результат, даже если это «1»"
+    },
+    {
+        id: "hellish-resistance",
+        trait_name: "Адское сопротивление",
+        trait_description: "Вы получаете сопротивление урону огнём"
+    },
+    {
+        id: "menacing",
+        trait_name: "Угрожающий вид",
+        trait_description: "Вы совершаете с преимуществом проверки Запугивания"
+    },
+    {
+        id: "relentless-endurance",
+        trait_name: "Непоколебимая стойкость",
+        trait_description: "Если ваши хиты опустились до нуля, но вы при этом не убиты, ваши хиты вместо этого опускаются до 1. Раз в сутки"
+    },
+    {
+        id: "savage-attacks",
+        trait_name: "Свирепые атаки",
+        trait_description: "Если вы совершили критическое попадание рукопашной атакой оружием, вы можете добавить к итоговому урону еще одну кость урона этого оружия"
+    },
+    {
+        id: "trance",
+        trait_name: "Транс",
+        trait_description: "Эльфы не нуждаются во сне. Вместо длинного отдыха, вы проводите медитацию до 4 часов"
+    },
+    {
+        id:"stonecunning",
+        trait_name:"Знание камня",
+        trait_description:`Если вы совершаете проверку, связанную с происхождением работы по камню, прибавьте к результату првоерки Истории +${2*prof_bon}`
+    }
+
+]
+
+const dragon_list = {
+    "gold": {
+        name: "Золотой",
+        element: "Огнём",
+        saving_throw: "Ловкости",
+        type:"15-фт конуса"
+    },
+    "silver": {
+        name: "Серебряный",
+        element: "Холодом",
+        saving_throw: "Телосложения",
+        type:"15-фт конуса"
+    },
+    "bronze": {
+        name: "Бронзовый",
+        element: "Электричеством",
+        saving_throw: "Ловкости",
+        type:"линии 5 на 30 фт"
+    },
+    "white": {
+        name: "Белый",
+        element: "Холодом",
+        saving_throw: "Телосложения",
+        type:"15-фт конуса"
+    },
+    "green": {
+        name: "Зеленый",
+        element: "Ядом",
+        saving_throw: "Телосложения",
+        type:"15-фт конуса"
+    },
+    "red": {
+        name: "Красный",
+        element: "Огнём",
+        saving_throw: "Ловкости",
+        type:"15-фт конуса"
+    },
+    "latun": {
+        name: "Латунный",
+        element: "Огнём",
+        saving_throw: "Ловкости",
+        type:"линии 5 на 30 фт"
+    },
+    "copper": {
+        name: "Медный",
+        element: "Кислотой",
+        saving_throw: "Ловкости",
+        type:"линии 5 на 30 фт"
+    },
+    "blue": {
+        name: "Синий",
+        element: "Электричеством",
+        saving_throw: "Ловкости",
+        type:"линии 5 на 30 фт"
+    },
+    "black": {
+        name: "Чёрный",
+        element: "Кислотой",
+        saving_throw: "Ловкости",
+        type:"линии 5 на 30 фт"
+    },
+};
+
+
+
+
+
+
+
+
 
 //Функции, которые выполняются при запуске приложения
 document.getElementById("limit").textContent = `${limit}`
@@ -83,62 +227,31 @@ function updateData () {
     checkRules ()
     updateNumbers ()
     updateHealth ()
-    removeRedOutlineOnInput();
+    removeRedOutlineOnInput()
     updatePDF () // Потом убрать??
 }
 
 
-let trait_list = ["artificers-lore",
-                "brave",
-                "breath-weapon",
-                "damage-resistance",
-                "darkvision",
-                "draconic-ancestry",
-                "draconic-ancestry-black",
-                "draconic-ancestry-blue",
-                "draconic-ancestry-brass",
-                "draconic-ancestry-bronze",
-                "draconic-ancestry-copper",
-                "draconic-ancestry-gold",
-                "draconic-ancestry-green",
-                "draconic-ancestry-red",
-                "draconic-ancestry-silver", 
-                "draconic-ancestry-white",
-                "dwarven-combat-training",
-                "dwarven-resilience",
-                "dwarven-toughness",
-                "elf-weapon-training",
-                "extra-language",
-                "fey-ancestry",
-                "gnome-cunning",
-                "halfling-nimbleness",
-                "hellish-resistance", 
-                "high-elf-cantrip",
-                "infernal-legacy",
-                "keen-senses",
-                "lucky",
-                "menacing",
-                "naturally-stealthy",
-                "relentless-endurance",
-                "savage-attacks",
-                "skill-versatility",
-                "stonecunning",
-                "tinker",
-                "tool-proficiency",
-                "trance"]
+// let trait_list = [
+
+//                 "breath-weapon",
+//                 "damage-resistance",
+//                 "draconic-ancestry",
+//                 "draconic-ancestry-black",
+//                 "draconic-ancestry-blue",
+//                 "draconic-ancestry-brass",
+//                 "draconic-ancestry-bronze",
+//                 "draconic-ancestry-copper",
+//                 "draconic-ancestry-gold",
+//                 "draconic-ancestry-green",
+//                 "draconic-ancestry-red",
+//                 "draconic-ancestry-silver", 
+//                 "draconic-ancestry-white",
+//                 "dwarven-combat-training",
+//                 "skill-versatility",
+//                 "tool-proficiency",
 
 
-for (let i = 0; i < trait_list.length; i++) {
-    console.log(requestTrait(trait_list[i]))
-}
-
-
-
-async function requestTrait (trait_index) {
-    fetch(traitUrl+trait_index)
-  .then((response) => response.text())
-//   .then((result) => console.log(result))
-}
 
 
 // Функция для преобразования модификаторов в нужный формат
@@ -198,7 +311,7 @@ function generatePDF() {
             html2canvas: { scale: 1 }, // Уменьшаем масштаб для меньшего разрешения
             jsPDF: {
                 unit: 'px',
-                format: [1000, 707], // Уменьшаем размер страницы (A4 в пикселях, но меньше)
+                format: [1750, 1240], // Уменьшаем размер страницы (A4 в пикселях, но меньше)
                 orientation: 'landscape'
             }
         };
@@ -213,7 +326,7 @@ function generatePDF() {
             pdfContent.style.display = "none";
         });
 
-    }, 500); // Небольшая задержка на 500 мс, чтобы убедиться, что все ресурсы загружены
+    }, 200); // Небольшая задержка, чтобы убедиться, что все ресурсы загружены
 }
 
 // Функция для удаления красной рамки при заполнении поля
@@ -326,21 +439,70 @@ function updateProficiencies (fix_prof, opt_prof){
 
 
 
-function updateTraits (tr) {
-    document.getElementById("traits").innerText =""
-    let length = Object.keys(Object.keys(traits)).length
-    console.log(length)
-    if (length <1) {
-        console.log("No traits")
-    } else {
-        for (let i = 0; i<length; i++){
-            document.getElementById("traits").innerText += `${tr[i]["name"]} \n`
-            console.log("index of trait " + tr[i]["index"], "name of trait " + tr[i]["name"])
+function updateTraits(traits) {
+    const traitsDiv = document.getElementById("traits");
+    traitsDiv.innerHTML = ''; // Очищаем содержимое div
+
+    traits.forEach(trait => {
+        if (trait.index === "draconic-ancestry") {
+            // Создаем заголовок "Наследие драконов"
+            const traitTitle = document.createElement("h4");
+            traitTitle.textContent = "Наследие драконов";
+
+            // Создаем селектор для выбора типа дракона
+            const dragonSelect = document.createElement("select");
+            dragonSelect.id = "dragon-select";
+
+            // Заполняем селектор опциями
+            for (let key in dragon_list) {
+                const option = document.createElement("option");
+                option.value = key;
+                option.textContent = dragon_list[key].name;
+                dragonSelect.appendChild(option);
+            }
+
+            // Добавляем заголовок и селектор в div
+            traitsDiv.appendChild(traitTitle);
+            traitsDiv.appendChild(dragonSelect);
+
+            // Добавляем блок для отображения текста
+            const descriptionP = document.createElement("p");
+            traitsDiv.appendChild(descriptionP);
+
+            // Обновление описания в зависимости от выбора
+            function updateDragonDescription() {
+                const selectedDragon = dragonSelect.value;
+                const dragon = dragon_list[selectedDragon];
+                
+                const prof_bon = 2; // Здесь укажи или вычисли бонус мастерства
+                const conBonus = document.getElementById("con").innerText; // Получаем значение Конс
+
+                descriptionP.innerHTML = `
+                    Ваш предок - <span class="font-weight-bold">${dragon.name} дракон.</span class="font-weight-bold"> <br>
+                    Вы можете действием выдохнуть разрушительную энергию и нанести <span class="font-weight-bold">2к6</span class="font-weight-bold"> урона <span class="font-weight-bold">${dragon.element}</span class="font-weight-bold"> в виде <span class="font-weight-bold">${dragon.type}</span class="font-weight-bold">. Соперник должен преуспеть в спасброске <span class="font-weight-bold">${dragon.saving_throw}</span class="font-weight-bold"> со сложностью <span class="font-weight-bold">${8 + prof_bon + Number(conBonus)}</span class="font-weight-bold">.<br>
+                    Наследие драконов дарует вам <span class="font-weight-bold">сопротивление урону ${dragon.element}</span class="font-weight-bold">.
+                `;
+            }
+
+            // Вызываем обновление текста при загрузке и изменении выбора
+            dragonSelect.addEventListener("change", updateDragonDescription);
+            updateDragonDescription(); // Первичное обновление
+        } else {
+            // Ищем черту в trait_list по полю "index"
+            const foundTrait = trait_list.find(t => t.id === trait.index);
+
+            if (foundTrait) {
+                const traitTitle = document.createElement("h4");
+                traitTitle.textContent = foundTrait.trait_name;
+
+                const traitDescription = document.createElement("p");
+                traitDescription.textContent = foundTrait.trait_description;
+
+                traitsDiv.appendChild(traitTitle);
+                traitsDiv.appendChild(traitDescription);
+            }
         }
-
-        console.log(traits[0]["index"])
-    }
-
+    });
 }
 
 

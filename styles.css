@@ -79,23 +79,25 @@ p {
     display: inline-block;
     text-transform: uppercase;
     color: #F9E8DE;
-    background: #CC5803;
+    background: #4D3F37;
     text-align: center;
     padding: 10px 5px;
     font-size: 15px;
     user-select: none;
-    cursor: pointer;
+    cursor: poRoboto;
     border-radius: 10px;
     width: 100%;
     height: 37px;
 }
 
 .img-label:hover {
+    background: #CC5803;
     opacity: 90%;
 }
 
 .img-label:active {
     transform: scale(0.9);
+    background: #CC5803;
 }
 
 /* .img-label::after {
@@ -109,8 +111,8 @@ p {
 
 
 #race {
-    height: 50px;
-    background: #F9E8DE;
+    height: 37px;
+    background: transparent;
     font-family: 'Roboto';
     font-size: 15px;
     align-self: flex-end;
@@ -131,8 +133,8 @@ p {
 }
 
 #class {
-    height: 50px;
-    background: #F9E8DE;
+    height: 37px;
+    background: transparent;
     font-family: 'Roboto';
     font-size: 15px;
     align-self: flex-end;
@@ -197,7 +199,7 @@ p {
     padding: 10px 5px;
     font-size: 15px;
     user-select: none;
-    cursor: pointer;
+    cursor: poRoboto;
     border-radius: 10px;
     width: 100%;
     height: 37px;
@@ -219,14 +221,25 @@ p {
 .general-container {
     display: grid;
     grid-template-areas:
-    "char-name  char-name char-img "
-    "char-story char-story race"
-    "char-story char-story class"
-    "health armor save-pdf";
+    "char-name race class char-img"
+    "char-story char-story char-story  health "
+    "char-story char-story char-story  armor ";
     row-gap: 5px;
     column-gap: 5px;
 
 }
+
+/* .general-container {
+    display: grid;
+    grid-template-areas:
+    "char-name  char-img . "
+    "char-story  race health"
+    "char-story  class armor";
+    row-gap: 5px;
+    column-gap: 5px;
+
+} */
+
 
 
 .abilities {
@@ -238,24 +251,24 @@ p {
 
 }
 
-.stat-header{
-    margin-top: 0px;
-}
-
 .ab-header, .stat-header{
+    margin-top: 0px;
     text-align: center;
-    font-size: 15px;
-    font-weight: bold;
+    font-size: 16px;
+    font-weight: 900;
+    font-family: "Roboto";
 }
 
 .ab-value, .stat-value{
     font-size: 25px;
+    font-family: "Roboto";
     text-align: center;
 }
 
 
 .weapons {
     grid-area: weapons;
+    width: auto;
 }
 
 
@@ -271,12 +284,13 @@ p {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: space-around;
+
 }
 
 .ability {
     justify-content: center;
-    width: 150px;
+    width: 160px;
     display: grid;
     grid-template-areas: 
     "ab-header ab-header"
@@ -308,13 +322,18 @@ p {
 }
 
 .add,.substract {
-    background-color: #F9E8DE;
+    background-color: #4D3F37;
+    color: #F9E8DE;
     width: 50px;
     margin: 5px;
+    border-radius: 3px;
+    border: none;
+    justify-self: center;
 }
 
 .add:hover, .substract:hover{
-    background-color: #f6cab0;
+    opacity: 90%;
+    background: #CC5803;
 }
 .add,.substract:focus {
     outline-color: #CC5803;
@@ -326,19 +345,27 @@ p {
     background-color: #CC5803;
 }
 
+.add:disabled, .substract:disabled{
+    opacity: 40%;
+    background: #4D3F37;
+    
+}
+
+
+
 .skill-list {
     grid-area: skill-list;
     list-style-type: none;
     margin-left: 5px;
     margin-right: 5px;
     padding-inline-start: 0px;
-    border: 5px;
+    /* border: 5px;
     border-style: solid;
-    border-color: brown;
+    border-color: brown; */
     margin-top: 5px;
     margin-bottom: 5px;
     height: 125px;
-    display: none;
+    display: block;
 }
 
 
@@ -352,9 +379,10 @@ p {
 .builder {
     display: grid;
     grid-template-areas:
-    "general abilities"
-    "weapons specials"
-    "inventory inventory";
+    "general general general"
+    "abilities abilities abilities"
+    "specials weapons inventory"
+    "save-pdf save-pdf save-pdf";
     row-gap: 10px;
     column-gap: 10px;
 }
@@ -424,13 +452,35 @@ body {
 
 }
 
+.font-weight-bold {
+    font-weight:bold;
+}
 
 .menubtn {
     line-height: 80px;
     margin-right: 10px;
-    cursor: pointer;
+    cursor: poRoboto;
     display: none;
 
+}
+
+#dragon-select {
+    display: inline;
+    outline:#4D3F37;
+    font-size: 15px;
+    width: 100%;
+    line-height: 25px;
+    border-radius: 5px;
+    border: 1px solid #4D3F37 ;
+    background: transparent;
+    padding: 5px;
+
+}
+
+#dragon-select:focus {
+    outline-style: solid;
+    outline-width: 2px;
+    outline-color: #CC5803;
 }
 
 
@@ -658,7 +708,8 @@ h1 {
       "abilities"
       "specials"
       "weapons"
-      "inventory";
+      "inventory"
+      "save-pdf";
     }
   }
 
@@ -678,7 +729,6 @@ h1 {
         "char-img char-img"
         "race class"
         "char-story char-story"
-        "health armor"
-        "save-pdf save-pdf";
+        "health armor";
 
 }}

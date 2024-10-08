@@ -103,13 +103,12 @@
                         <label for="char-story" class="input-story-label">Предыстория</label>
                         <textarea name="char-story" id="char-story" rows="4" cols="50" placeholder="Напишите короткую предысторию своего персонажа"></textarea>
                     </div>
-                    <button id="save-pdf" onclick="generatePDF()">Скачать лист персонажа</button>
                 </div>
 
             </div>
             <div class="abilities">
                 <div class="section-header">
-                    Свободные очки: <span id="limit"></span>
+                    Свободные очки характеристик: <span id="limit"></span>
                 </div>
                 <div class="ab-container">
 
@@ -133,7 +132,7 @@
                         <ul class="skill-list">
                             <li id="skill-acrobatics">Акробатика</li>
                             <li id="skill-stealth">Скрытность</li>
-                            <li id="skill-sleight-of-hand">Ловкость рук</li>
+                            <li id="skill-sleight-of-hand" class="skill-checkbox">Ловкость рук +6</li>
                         </ul>
                         <div class="saving-throw" id="dex-saving-throw"></div>
                     </div>
@@ -203,6 +202,7 @@
                     Владение оружием
                 </div>
                 <div class="weapons-container">
+                    Здесь появятся опции оружия, в зависимости от выбранного класса
                     <!--Тут будет выбор оружия в зависимости от расы/класса-->
                 </div>
             </div>
@@ -212,6 +212,7 @@
                     Инвентарь
                 </div>
                 <div class="inventory-container">
+                    Здесь будет ваш инветарь
                     <!--Тут будет выбор инвентаря-->
                 </div>
             </div>
@@ -227,6 +228,8 @@
                     <!--Тут будет выбор способностей в зависимости от расы/класса-->
                 </div>
             </div>
+            <button id="save-pdf" onclick="generatePDF()">Скачать лист персонажа</button>
+
         </section>
         <!-- <iframe src="files/sqwozbab-2.pdf" frameborder="0" width="100%" height="900px"></iframe> -->
 
