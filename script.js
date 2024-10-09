@@ -2,7 +2,6 @@
 
 const raceURL = "https://www.dnd5eapi.co/api/races/"
 const classURL = "https://www.dnd5eapi.co/api/classes/"
-const traitUrl = "https://www.dnd5eapi.co/api/traits/"
 
 // Селекторы элементов, которые прослушиваем
 
@@ -16,7 +15,7 @@ const substractButtons = document.getElementsByClassName("substract");
 let ability_bonuses = null // Готово
 let starting_proficiencies = null
 let starting_proficiency_options = null
-let traits = null
+let traits = null // Готово
 let hit_die = 8 // Готово
 
 
@@ -26,7 +25,7 @@ let proficiencies = null
 let proficiency_choices = null
 let starting_equipment =null
 let starting_equipment_options =null
-let saving_throws = null
+let saving_throws = null // Готово
 
 
 //Базовые показатели персонажа
@@ -58,7 +57,7 @@ let limit = 3
 // Значение бонуса мастерства (владения)
 let prof_bon = 3
 
-//Абстрактный уровень персонажа
+//Условный уровень персонажа
 
 let lvl = 2
 
@@ -68,6 +67,8 @@ let health = null
 
 let armor = null
 
+
+// Список всех черт
 
 const trait_list = [
     {
@@ -143,6 +144,7 @@ const trait_list = [
 
 ]
 
+// Список происхождений драконорожденых
 const dragon_list = {
     "gold": {
         name: "Золотой",
@@ -209,11 +211,6 @@ const dragon_list = {
 
 
 
-
-
-
-
-
 //Функции, которые выполняются при запуске приложения
 document.getElementById("limit").textContent = `${limit}`
 updateData()
@@ -223,10 +220,10 @@ updateData()
 // Функция, которая обновляет все данные на экране
 function updateData () {
     displayAbilities ()
-    updateSavingThrows ()
     checkRules ()
     updateNumbers ()
     updateHealth ()
+    updateSavingThrows ()
     removeRedOutlineOnInput()
     updatePDF () // Потом убрать??
 }
@@ -234,19 +231,6 @@ function updateData () {
 
 // let trait_list = [
 
-//                 "breath-weapon",
-//                 "damage-resistance",
-//                 "draconic-ancestry",
-//                 "draconic-ancestry-black",
-//                 "draconic-ancestry-blue",
-//                 "draconic-ancestry-brass",
-//                 "draconic-ancestry-bronze",
-//                 "draconic-ancestry-copper",
-//                 "draconic-ancestry-gold",
-//                 "draconic-ancestry-green",
-//                 "draconic-ancestry-red",
-//                 "draconic-ancestry-silver", 
-//                 "draconic-ancestry-white",
 //                 "dwarven-combat-training",
 //                 "skill-versatility",
 //                 "tool-proficiency",
@@ -273,6 +257,26 @@ function updateNumbers () {
 });
 
 }
+
+
+
+function updatePDF () {
+    document.getElementById("char-name-page").innerText =
+    `${document.getElementById("char-name").value}, ${document.getElementById("race").options[document.getElementById("race").selectedIndex].text}-${document.getElementById("class").options[document.getElementById("class").selectedIndex].text}`;
+    document.getElementById("str-page").innerText = document.getElementById("str").innerText;
+    document.getElementById("dex-page").innerText = document.getElementById("dex").innerText;
+    document.getElementById("con-page").innerText = document.getElementById("con").innerText;
+    document.getElementById("int-page").innerText = document.getElementById("int").innerText;
+    document.getElementById("wis-page").innerText = document.getElementById("wis").innerText;
+    document.getElementById("cha-page").innerText = document.getElementById("cha").innerText;
+
+    document.getElementById("hits-value").innerText = document.getElementById("hits").innerText;
+    document.getElementById("arm-value").innerText = document.getElementById("armor-value").innerText;
+
+    
+
+}
+
 
 function generatePDF() {
     // Проверка на заполненность полей
@@ -357,25 +361,6 @@ function checkLimit (char, char_bon) {
 }
 
 
-function updatePDF () {
-    document.getElementById("char-name-page").innerText =
-    `${document.getElementById("char-name").value}, ${document.getElementById("race").options[document.getElementById("race").selectedIndex].text}-${document.getElementById("class").options[document.getElementById("class").selectedIndex].text}`;
-    document.getElementById("str-page").innerText = document.getElementById("str").innerText;
-    document.getElementById("dex-page").innerText = document.getElementById("dex").innerText;
-    document.getElementById("con-page").innerText = document.getElementById("con").innerText;
-    document.getElementById("int-page").innerText = document.getElementById("int").innerText;
-    document.getElementById("wis-page").innerText = document.getElementById("wis").innerText;
-    document.getElementById("cha-page").innerText = document.getElementById("cha").innerText;
-
-    document.getElementById("hits-value").innerText = document.getElementById("hits").innerText;
-    document.getElementById("arm-value").innerText = document.getElementById("armor-value").innerText;
-
-    
-
-}
-
-
-
 //Отображает посчитанные значения модификаторов
 function displayAbilities () {
     document.getElementById("cha").innerText = `${checkLimit(cha,cha_bon)}`;
@@ -395,8 +380,16 @@ function calculateAbilityBonus (value) {
 
 // Обновляет значения спасбросков
 function updateSavingThrows() {
+    document.getElementById(`str-saving-throw`).textContent = `Спасбросок ${document.getElementById("str").innerText}`
+    document.getElementById(`dex-saving-throw`).textContent = `Спасбросок ${document.getElementById("dex").innerText}`
+    document.getElementById(`con-saving-throw`).textContent = `Спасбросок ${document.getElementById("con").innerText}`
+    document.getElementById(`int-saving-throw`).textContent = `Спасбросок ${document.getElementById("int").innerText}`
+    document.getElementById(`cha-saving-throw`).textContent = `Спасбросок ${document.getElementById("cha").innerText}`
+    document.getElementById(`wis-saving-throw`).textContent = `Спасбросок ${document.getElementById("wis").innerText}`
+
     if (saving_throws == null) {
-        // do nothing
+        // Do nothing
+
     } else {
         saving_throws.forEach((throwItem) => {
             const abilityValue = document.getElementById(throwItem.index);
@@ -478,10 +471,12 @@ function updateTraits(traits) {
                 const conBonus = document.getElementById("con").innerText; // Получаем значение Конс
 
                 descriptionP.innerHTML = `
-                    Ваш предок - <span class="font-weight-bold">${dragon.name} дракон.</span class="font-weight-bold"> <br>
-                    Вы можете действием выдохнуть разрушительную энергию и нанести <span class="font-weight-bold">2к6</span class="font-weight-bold"> урона <span class="font-weight-bold">${dragon.element}</span class="font-weight-bold"> в виде <span class="font-weight-bold">${dragon.type}</span class="font-weight-bold">. Соперник должен преуспеть в спасброске <span class="font-weight-bold">${dragon.saving_throw}</span class="font-weight-bold"> со сложностью <span class="font-weight-bold">${8 + prof_bon + Number(conBonus)}</span class="font-weight-bold">.<br>
-                    Наследие драконов дарует вам <span class="font-weight-bold">сопротивление урону ${dragon.element}</span class="font-weight-bold">.
-                `;
+                    <p>Ваш предок - ${dragon.name} дракон</p>
+                    <h4>Оружие дыхания</h4>
+                    <p>Вы можете действием выдохнуть разрушительную энергию и нанести 2к6 урона ${dragon.element} в виде ${dragon.type}.<br>Соперник должен преуспеть в спасброске ${dragon.saving_throw} со сложностью ${8 + prof_bon + Number(conBonus)}  
+                    </p>
+                    <h4>Сопротивление урону</h4>
+                    <p>Наследие драконов дарует вам сопротивление урону ${dragon.element} </p>`;
             }
 
             // Вызываем обновление текста при загрузке и изменении выбора

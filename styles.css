@@ -182,10 +182,12 @@ p {
 
 #health {
     grid-area: health;
+    margin-top: 5px;
 }
 
 #armor {
     grid-area: armor;
+    margin-top: 5px;
 }
 
 #save-pdf {
@@ -259,25 +261,53 @@ p {
     font-family: "Roboto";
 }
 
+.ab-header {
+    margin-top: 15px;
+    margin-bottom: 0px;
+}
+
 .ab-value, .stat-value{
     font-size: 25px;
     font-family: "Roboto";
     text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
+
 
 
 .weapons {
     grid-area: weapons;
     width: auto;
+    font-family: "Roboto";
+    font-size: 16px;
 }
 
 
 .inventory {
     grid-area: inventory;
+    font-family: "Roboto";
+    font-size: 16px;
 }
 
 .specials {
     grid-area: specials;
+    font-family: "Roboto";
+    font-size: 16px;
+}
+
+.specials h4, .weapons h4, .inventory h4 {
+    font-family: "Oswald";
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+
+.specials p, .weapons p, .inventory p  {
+    font-family: "Roboto";
+    font-size: 16px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .ab-container{
@@ -356,8 +386,8 @@ p {
 .skill-list {
     grid-area: skill-list;
     list-style-type: none;
-    margin-left: 5px;
-    margin-right: 5px;
+    margin-left: 0px;
+    margin-right: 0px;
     padding-inline-start: 0px;
     /* border: 5px;
     border-style: solid;
@@ -365,7 +395,11 @@ p {
     margin-top: 5px;
     margin-bottom: 5px;
     height: 125px;
-    display: block;
+    width: 130px;
+    display: none;
+    font-family: "Roboto";
+    font-size: 14px;
+    text-align: center;
 }
 
 
@@ -374,6 +408,8 @@ p {
     height: 20px;
     font-size: 15px;
     margin-bottom: 0px;
+    font-family: "Roboto";
+    text-align: center;
 }
 
 .builder {
@@ -385,6 +421,7 @@ p {
     "save-pdf save-pdf save-pdf";
     row-gap: 10px;
     column-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 
@@ -453,7 +490,9 @@ body {
 }
 
 .font-weight-bold {
-    font-weight:bold;
+    font-weight: 900;
+    color: #CC5803;
+
 }
 
 .menubtn {
@@ -542,6 +581,7 @@ h1 {
     font-weight: bold;
     font-size: 25px;
     margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 
@@ -730,5 +770,6 @@ h1 {
         "race class"
         "char-story char-story"
         "health armor";
+        grid-template-columns: 1fr 1fr;
 
 }}
