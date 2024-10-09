@@ -149,6 +149,23 @@ p {
     outline-color: #CC5803;
 }
 
+select {
+    height: 37px;
+    background: transparent;
+    font-family: 'Roboto';
+    font-size: 15px;
+    align-self: flex-end;
+    width: 100%;
+    border-radius: 5px;
+    border-color: #4D3F37;
+}
+
+select:focus {
+    outline-style: solid;
+    outline-width: 2px;
+    outline-color: #CC5803;
+}
+
 
 #char-story {
     font-family: 'Roboto';
@@ -417,7 +434,8 @@ p {
     grid-template-areas:
     "general general general"
     "abilities abilities abilities"
-    "specials weapons inventory"
+    "specials specials weapons "
+    "specials specials inventory "
     "save-pdf save-pdf save-pdf";
     row-gap: 10px;
     column-gap: 10px;

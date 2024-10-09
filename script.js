@@ -13,18 +13,12 @@ const substractButtons = document.getElementsByClassName("substract");
 
 //Параметры, полученные от расы
 let ability_bonuses = null // Готово
-let starting_proficiencies = null
-let starting_proficiency_options = null
 let traits = null // Готово
 let hit_die = 8 // Готово
 
 
 //Параметры, полученные от класса
 
-let proficiencies = null
-let proficiency_choices = null
-let starting_equipment =null
-let starting_equipment_options =null
 let saving_throws = null // Готово
 
 
@@ -55,7 +49,7 @@ let max_value = 4
 let limit = 3
 
 // Значение бонуса мастерства (владения)
-let prof_bon = 3
+let prof_bon = 2
 
 //Условный уровень персонажа
 
@@ -94,7 +88,7 @@ const trait_list = [
     {
         id: "gnome-cunning",
         trait_name: "Гномья хитрость",
-        trait_description: "Вы совершаете с преимуществом спасброски Интеллекта, Мудрости и Харизмы против магии"
+        trait_description: "Вы совершаете с преимуществом спасброски Интеллекта, Мудрости и Харизмы"
     },
     {
         id: "halfling-nimbleness",
@@ -140,7 +134,7 @@ const trait_list = [
         id:"stonecunning",
         trait_name:"Знание камня",
         trait_description:`Если вы совершаете проверку, связанную с происхождением работы по камню, прибавьте к результату првоерки Истории +${2*prof_bon}`
-    }
+    },
 
 ]
 
@@ -210,6 +204,216 @@ const dragon_list = {
 
 
 
+const weapons_list = [
+    { id: "light1", name: "Боевой посох", base_char: "dex", hit_die: "1d6", description: "При атаке двумя руками: 1d8 вместо 1d6" },
+    { id: "light2", name: "Булава", base_char: "str", hit_die: "1d6", description: "" },
+    { id: "light3", name: "Дубинка", base_char: "str", hit_die: "1d4", description: "Можно сражаться двумя оружиями" },
+    { id: "light4", name: "Кинжал", base_char: "dex", hit_die: "1d4", description: "Можно сражаться двумя оружиями, метательное" },
+    { id: "light5", name: "Копьё", base_char: "str", hit_die: "1d6", description: "Метательное, при атаке двумя руками: 1d8 вместо 1d6" },
+    { id: "light6", name: "Лёгкий молот", base_char: "str", hit_die: "1d4", description: "Можно сражаться двумя оружиями, метательное" },
+    { id: "light7", name: "Метательное копьё", base_char: "dex", hit_die: "1d6", description: "Метательное" },
+    { id: "light8", name: "Палица", base_char: "str", hit_die: "1d8", description: "Необходимо держать двумя руками" },
+    { id: "light9", name: "Ручной топор", base_char: "str", hit_die: "1d6", description: "Можно сражаться двумя оружиями, метательное" },
+    { id: "light10", name: "Серп", base_char: "dex", hit_die: "1d4", description: "Можно сражаться двумя оружиями" },
+    { id: "light11", name: "Лёгкий арбалет", base_char: "dex", hit_die: "1d8", description: "Необходимо держать двумя руками" },
+    { id: "light12", name: "Дротик", base_char: "dex", hit_die: "1d4", description: "Метательное" },
+    { id: "light13", name: "Короткий лук", base_char: "dex", hit_die: "1d6", description: "Необходимо держать двумя руками" },
+    { id: "light14", name: "Праща", base_char: "dex", hit_die: "1d4", description: "" },
+    { id: "battle1", name: "Алебарда", base_char: "str", hit_die: "1d10", description: "Необходимо держать двумя руками" },
+    { id: "battle2", name: "Боевая кирка", base_char: "str", hit_die: "1d8", description: "" },
+    { id: "battle3", name: "Боевой молот", base_char: "str", hit_die: "1d8", description: "При атаке двумя руками: 1d10 вместо 1d8" },
+    { id: "battle4", name: "Боевой топор", base_char: "str", hit_die: "1d8", description: "При атаке двумя руками: 1d10 вместо 1d8" },
+    { id: "battle5", name: "Глефа", base_char: "str", hit_die: "1d10", description: "Необходимо держать двумя руками" },
+    { id: "battle6", name: "Двуручный меч", base_char: "str", hit_die: "2d6", description: "Необходимо держать двумя руками" },
+    { id: "battle7", name: "Длинное копьё", base_char: "str", hit_die: "1d12", description: "Досягаемость, особое" },
+    { id: "battle8", name: "Длинный меч", base_char: "str", hit_die: "1d8", description: "При атаке двумя руками: 1d10 вместо 1d8" },
+    { id: "battle9", name: "Кнут", base_char: "dex", hit_die: "1d4", description: "Досягаемость, фехтовальное" },
+    { id: "battle10", name: "Короткий меч", base_char: "dex", hit_die: "1d6", description: "Можно сражаться двумя оружиями, фехтовальное" },
+    { id: "battle11", name: "Молот", base_char: "str", hit_die: "2d6", description: "Необходимо держать двумя руками, тяжёлое" },
+    { id: "battle12", name: "Моргенштерн", base_char: "str", hit_die: "1d8", description: "" },
+    { id: "battle13", name: "Пика", base_char: "str", hit_die: "1d10", description: "Необходимо держать двумя руками" },
+    { id: "battle14", name: "Рапира", base_char: "str", hit_die: "1d8", description: "Фехтовальное" },
+    { id: "battle15", name: "Секира", base_char: "str", hit_die: "1d12", description: "Необходимо держать двумя руками" },
+    { id: "battle16", name: "Скимитар", base_char: "str", hit_die: "1d6", description: "Можно сражаться двумя оружиями, фехтовальное" },
+    { id: "battle17", name: "Трезубец", base_char: "str", hit_die: "1d6", description: "Метательное, при атаке двумя руками: 1d8 вместо 1d6" },
+    { id: "battle18", name: "Цеп", base_char: "dex", hit_die: "1d8", description: "" },
+    { id: "battle19", name: "Ручной арбалет", base_char: "dex", hit_die: "1d6", description: "Можно сражаться двумя оружиями" },
+    { id: "battle20", name: "Тяжёлый арбалет", base_char: "dex", hit_die: "1d10", description: "Необходимо держать двумя руками" },
+    { id: "battle21", name: "Длинный лук", base_char: "dex", hit_die: "1d8", description: "Необходимо держать двумя руками" }
+];
+
+const armor_list = [
+    { id: "light1", name: "Стёганый доспех", dex: true, arm_value: 11 },
+    { id: "light2", name: "Кожаный доспех", dex: true, arm_value: 11 },
+    { id: "light3", name: "Проклёпанный кожаный доспех", dex: true, arm_value: 12 },
+    { id: "middle1", name: "Шкурный доспех", dex: true, arm_value: 12 },
+    { id: "middle2", name: "Кольчужная рубаха", dex: true, arm_value: 13 },
+    { id: "middle3", name: "Чешуйчатый доспех", dex: true, arm_value: 14 },
+    { id: "middle4", name: "Кираса", dex: true, arm_value: 14 },
+    { id: "middle5", name: "Полулаты", dex: true, arm_value: 15 },
+    { id: "heavy1", name: "Колечный доспех", dex: false, arm_value: 14 },
+    { id: "heavy2", name: "Кольчуга", dex: false, arm_value: 16 },
+    { id: "heavy3", name: "Наборный доспех", dex: false, arm_value: 17 },
+    { id: "heavy4", name: "Латы", dex: false, arm_value: 18 },
+    { id: "no-armour-barbarian", name: "Без доспехов", dex: false, arm_value: 10+document.getElementById("dex").innerText+document.getElementById("con").innerText },
+    { id: "no-armor", name: "Без доспехов", dex: true, arm_value: 10 },
+
+];
+
+const specials = [
+    {
+        id: "rage",
+        name: "Дикая ярость",
+        description: "Описание способности."
+    },
+    {
+        id: "no-armor",
+        name: "Защита без доспехов",
+        description: "Описание способности."
+    },
+    {
+        id: "crazy-attack",
+        name: "Безрассудная атака",
+        description: "Описание способности."
+    },
+    {
+        id: "sense-of-danger",
+        name: "Чувство опасности",
+        description: "Описание способности."
+    }
+    // Добавляй другие способности
+];
+
+
+const class_properties = {
+    barbarian: {
+        name: "Варвар",
+        specials: ["rage","crazy-attack","sense-of-danger"],
+        weapons: [
+            "light1", "light2", "light3", "light4", "light5", "light6", "light7", "light8", "light9", "light10", 
+            "light11", "light12", "light13", "light14", "battle1", "battle2", "battle3", "battle4", "battle5", 
+            "battle6", "battle7", "battle8", "battle9", "battle10", "battle11", "battle12", "battle13", "battle14", 
+            "battle15", "battle16", "battle17", "battle18", "battle19", "battle20", "battle21"
+        ],
+        armor: ["light1", "light2", "light3", 
+                "middle1", "middle2", "middle3", "middle4", "middle5",],
+        skills: [],
+        charms: [],
+        spells: [],
+        inventory: []
+    },
+    bard: {
+        name: "Бард",
+        specials: [],
+        weapons: [],
+        armor: [],
+        skills: [],
+        charms: [],
+        spells: [],
+        inventory: []
+    },
+    cleric: {
+        name: "Жрец",
+        specials: [],
+        weapons: [],
+        armor: [],
+        skills: [],
+        charms: [],
+        spells: [],
+        inventory: []
+    },
+    druid: {
+        name: "Друид",
+        specials: [],
+        weapons: [],
+        armor: [],
+        skills: [],
+        charms: [],
+        spells: [],
+        inventory: []
+    },
+    fighter: {
+        name: "Воин",
+        specials: [],
+        weapons: [],
+        armor: [],
+        skills: [],
+        charms: [],
+        spells: [],
+        inventory: []
+    },
+    monk: {
+        name: "Монах",
+        specials: [],
+        weapons: [],
+        armor: [],
+        skills: [],
+        charms: [],
+        spells: [],
+        inventory: []
+    },
+    paladin: {
+        name: "Паладин",
+        specials: [],
+        weapons: [],
+        armor: [],
+        skills: [],
+        charms: [],
+        spells: [],
+        inventory: []
+    },
+    ranger: {
+        name: "Следопыт",
+        specials: [],
+        weapons: [],
+        armor: [],
+        skills: [],
+        charms: [],
+        spells: [],
+        inventory: []
+    },
+    rogue: {
+        name: "Плут",
+        specials: [],
+        weapons: [],
+        armor: [],
+        skills: [],
+        charms: [],
+        spells: [],
+        inventory: []
+    },
+    sorcerer: {
+        name: "Чародей",
+        specials: [],
+        weapons: [],
+        armor: [],
+        skills: [],
+        charms: [],
+        spells: [],
+        inventory: []
+    },
+    warlock: {
+        name: "Колдун",
+        specials: [],
+        weapons: [],
+        armor: [],
+        skills: [],
+        charms: [],
+        spells: [],
+        inventory: []
+    },
+    wizard: {
+        name: "Волшебник",
+        specials: [],
+        weapons: [],
+        armor: [],
+        skills: [],
+        charms: [],
+        spells: [],
+        inventory: []
+    }
+};
+
 
 //Функции, которые выполняются при запуске приложения
 document.getElementById("limit").textContent = `${limit}`
@@ -232,7 +436,6 @@ function updateData () {
 // let trait_list = [
 
 //                 "dwarven-combat-training",
-//                 "skill-versatility",
 //                 "tool-proficiency",
 
 
@@ -501,6 +704,103 @@ function updateTraits(traits) {
 }
 
 
+function updateWeaponChoices(selectedClass) {
+    // Получаем контейнеры для выбора оружия и описания
+    const weaponsChoiceDiv = document.querySelector('.weapons-choice');
+    const weaponsDescriptionsDiv = document.querySelector('.weapons-descriptions');
+
+    // Очищаем контейнеры перед добавлением нового контента
+    weaponsChoiceDiv.innerHTML = '';
+    weaponsDescriptionsDiv.innerHTML = '';
+
+    // Если класс не выбран, ничего не делаем
+    if (!selectedClass || !class_properties[selectedClass]) return;
+
+    // Получаем список оружий для выбранного класса
+    const classWeapons = class_properties[selectedClass].weapons;
+    if (classWeapons.length < 3) return; // Проверяем, что оружия достаточно
+
+    // Функция для создания опций селектора
+    function createWeaponOption(weaponId) {
+        const weapon = weapons_list.find(w => w.id === weaponId);
+        const option = document.createElement('option');
+        option.value = weapon.id;
+        option.textContent = weapon.name;
+        return option;
+    }
+
+    // Создаем селектор для основного оружия (select1)
+    const select1 = document.createElement('select');
+    classWeapons.forEach((weaponId, index) => {
+        const option = createWeaponOption(weaponId);
+        if (index === 0) option.selected = true; // По умолчанию первая опция
+        select1.appendChild(option);
+    });
+    weaponsChoiceDiv.appendChild(document.createTextNode("Основное оружие: "));
+    weaponsChoiceDiv.appendChild(select1);
+
+    // Создаем селектор для дополнительного оружия (select2)
+    const select2 = document.createElement('select');
+    classWeapons.forEach((weaponId, index) => {
+        const option = createWeaponOption(weaponId);
+        if (index === 1) option.selected = true; // По умолчанию вторая опция
+        select2.appendChild(option);
+    });
+    weaponsChoiceDiv.appendChild(document.createTextNode("Дополнительное оружие: "));
+    weaponsChoiceDiv.appendChild(select2);
+
+    // Создаем селектор для дополнительного оружия (select3)
+    const select3 = document.createElement('select');
+    classWeapons.forEach((weaponId, index) => {
+        const option = createWeaponOption(weaponId);
+        if (index === 2) option.selected = true; // По умолчанию третья опция
+        select3.appendChild(option);
+    });
+    weaponsChoiceDiv.appendChild(select3);
+
+    // Функция для обновления описания оружия
+    function updateWeaponDescription() {
+        weaponsDescriptionsDiv.innerHTML = ''; // Очищаем описание
+        [select1, select2, select3].forEach(select => {
+            const selectedWeaponId = select.value;
+            const weapon = weapons_list.find(w => w.id === selectedWeaponId);
+
+            if (weapon) {
+                // Создаем h4 для названия оружия
+                const weaponTitle = document.createElement('h4');
+                weaponTitle.textContent = weapon.name;
+                weaponsDescriptionsDiv.appendChild(weaponTitle);
+
+                // Рассчитываем бонус к атаке и урон
+                const baseCharValue = document.getElementById(weapon.base_char).innerText;
+                const prof_bon = 2; // Пример, как задать бонус мастерства
+                const attackBonus = prof_bon + Number(baseCharValue);
+                const damage = `${weapon.hit_die} + ${baseCharValue}`;
+
+                // Создаем div для бонуса атаки и урона
+                const attackBonusDiv = document.createElement('div');
+                attackBonusDiv.classList.add('attack-bonus');
+                attackBonusDiv.textContent = `Атака +${attackBonus}, урон ${damage}`;
+                weaponsDescriptionsDiv.appendChild(attackBonusDiv);
+
+                // Если есть описание, добавляем p
+                if (weapon.description) {
+                    const descriptionP = document.createElement('p');
+                    descriptionP.textContent = weapon.description;
+                    weaponsDescriptionsDiv.appendChild(descriptionP);
+                }
+            }
+        });
+    }
+
+    // Добавляем обработчики для изменения описания при смене выбора
+    select1.addEventListener('change', updateWeaponDescription);
+    select2.addEventListener('change', updateWeaponDescription);
+    select3.addEventListener('change', updateWeaponDescription);
+
+    // Обновляем описание для начальных значений
+    updateWeaponDescription();
+}
 
 
 //Функция, которая сохраняет полученные через API бонусы в соответствующие переменные
@@ -675,5 +975,6 @@ async function parseClass(event) {
         savingThrows[i].textContent = "";
     }
     updateData()
+    updateWeaponChoices(event.target.value)
   }
 
