@@ -290,10 +290,10 @@ const class_properties = {
         name: "Варвар",
         specials: ["rage","crazy-attack","sense-of-danger"],
         weapons: [
-            "light1", "light2", "light3", "light4", "light5", "light6", "light7", "light8", "light9", "light10", 
-            "light11", "light12", "light13", "light14", "battle1", "battle2", "battle3", "battle4", "battle5", 
+            "battle15","battle3","light4","light1", "light2", "light3", "light5", "light6", "light7", "light8", "light9", "light10", 
+            "light11", "light12", "light13", "light14", "battle1", "battle2", "battle4", "battle5", 
             "battle6", "battle7", "battle8", "battle9", "battle10", "battle11", "battle12", "battle13", "battle14", 
-            "battle15", "battle16", "battle17", "battle18", "battle19", "battle20", "battle21"
+             "battle16", "battle17", "battle18", "battle19", "battle20", "battle21"
         ],
         armor: ["light1", "light2", "light3", 
                 "middle1", "middle2", "middle3", "middle4", "middle5",],
@@ -305,7 +305,8 @@ const class_properties = {
     bard: {
         name: "Бард",
         specials: [],
-        weapons: [],
+        weapons: ["battle14","battle10","battle19","battle8","light4","light1", "light2", "light3", "light5", "light6", "light7", "light8", "light9", "light10", 
+            "light11", "light12", "light13", "light14",],
         armor: [],
         skills: [],
         charms: [],
@@ -315,7 +316,8 @@ const class_properties = {
     cleric: {
         name: "Жрец",
         specials: [],
-        weapons: [],
+        weapons: ["light1","light10","light4", "light2", "light3", "light5", "light6", "light7", "light8", "light9", 
+            "light11", "light12", "light13", "light14"],
         armor: [],
         skills: [],
         charms: [],
@@ -325,7 +327,7 @@ const class_properties = {
     druid: {
         name: "Друид",
         specials: [],
-        weapons: [],
+        weapons: ["light1","battle16","light14","light2","light3","light4","light5","light7","light10",],
         armor: [],
         skills: [],
         charms: [],
@@ -335,7 +337,10 @@ const class_properties = {
     fighter: {
         name: "Воин",
         specials: [],
-        weapons: [],
+        weapons: ["battle8","battle20","light2", "battle15","battle3","light4","light1", "light3", "light5", "light6", "light7", "light8", "light9", "light10", 
+            "light11", "light12", "light13", "light14", "battle1", "battle2", "battle4", "battle5", 
+            "battle6", "battle7",  "battle9", "battle10", "battle11", "battle12", "battle13", "battle14", 
+             "battle16", "battle17", "battle18", "battle19", "battle21"],
         armor: [],
         skills: [],
         charms: [],
@@ -345,7 +350,8 @@ const class_properties = {
     monk: {
         name: "Монах",
         specials: [],
-        weapons: [],
+        weapons: ["light1","battle10","light4","light2", "light3", "light5", "light6", "light7", "light8", "light9", "light10", 
+            "light11", "light12", "light13", "light14"],
         armor: [],
         skills: [],
         charms: [],
@@ -355,7 +361,10 @@ const class_properties = {
     paladin: {
         name: "Паладин",
         specials: [],
-        weapons: [],
+        weapons: ["battle8","battle20","light2", "battle15","battle3","light4","light1", "light3", "light5", "light6", "light7", "light8", "light9", "light10", 
+            "light11", "light12", "light13", "light14", "battle1", "battle2", "battle4", "battle5", 
+            "battle6", "battle7",  "battle9", "battle10", "battle11", "battle12", "battle13", "battle14", 
+             "battle16", "battle17", "battle18", "battle19", "battle21"],
         armor: [],
         skills: [],
         charms: [],
@@ -365,7 +374,10 @@ const class_properties = {
     ranger: {
         name: "Следопыт",
         specials: [],
-        weapons: [],
+        weapons: ["battle21", "battle10","light4","battle8","battle20","light2", "battle15","battle3","light1", "light3", "light5", "light6", "light7", "light8", "light9", "light10", 
+            "light11", "light12", "light13", "light14", "battle1", "battle2", "battle4", "battle5", 
+            "battle6", "battle7",  "battle9", "battle11", "battle12", "battle13", "battle14", 
+             "battle16", "battle17", "battle18", "battle19", ],
         armor: [],
         skills: [],
         charms: [],
@@ -375,7 +387,8 @@ const class_properties = {
     rogue: {
         name: "Плут",
         specials: [],
-        weapons: [],
+        weapons: ["battle20","battle10","battle14","light1","battle8", "light2", "light3", "light4", "light5", "light6", "light7", "light8", "light9", "light10", 
+    "light11", "light12", "light13", "light14",],
         armor: [],
         skills: [],
         charms: [],
@@ -385,7 +398,7 @@ const class_properties = {
     sorcerer: {
         name: "Чародей",
         specials: [],
-        weapons: [],
+        weapons: ["light1","light12","light4","light11","light14",],
         armor: [],
         skills: [],
         charms: [],
@@ -395,7 +408,8 @@ const class_properties = {
     warlock: {
         name: "Колдун",
         specials: [],
-        weapons: [],
+        weapons: ["light1", "light2", "light3", "light4", "light5", "light6", "light7", "light8", "light9", "light10", 
+    "light11", "light12", "light13", "light14"],
         armor: [],
         skills: [],
         charms: [],
@@ -405,7 +419,7 @@ const class_properties = {
     wizard: {
         name: "Волшебник",
         specials: [],
-        weapons: [],
+        weapons: ["light1","light12","light4","light11","light14",],
         armor: [],
         skills: [],
         charms: [],
@@ -429,6 +443,7 @@ function updateData () {
     updateHealth ()
     updateSavingThrows ()
     removeRedOutlineOnInput()
+    updateWeaponChoices(document.getElementById("class").value)
     updatePDF () // Потом убрать??
 }
 
@@ -497,7 +512,7 @@ function generatePDF() {
 
     // Если есть незаполненные поля, отменяем генерацию PDF
     if (!allFieldsValid) {
-        alert("Please fill out all required fields!"); // Предупреждение пользователю
+        alert("Пожалуйста, выберите расу, класс и придумайте имя персонажа!"); // Предупреждение пользователю
         return; // Прекращаем выполнение функции
     }
 
@@ -710,11 +725,11 @@ function updateWeaponChoices(selectedClass) {
     const weaponsDescriptionsDiv = document.querySelector('.weapons-descriptions');
 
     // Очищаем контейнеры перед добавлением нового контента
-    weaponsChoiceDiv.innerHTML = '';
-    weaponsDescriptionsDiv.innerHTML = '';
 
     // Если класс не выбран, ничего не делаем
     if (!selectedClass || !class_properties[selectedClass]) return;
+    weaponsChoiceDiv.innerHTML = '';
+    weaponsDescriptionsDiv.innerHTML = '';
 
     // Получаем список оружий для выбранного класса
     const classWeapons = class_properties[selectedClass].weapons;
@@ -775,7 +790,7 @@ function updateWeaponChoices(selectedClass) {
                 const baseCharValue = document.getElementById(weapon.base_char).innerText;
                 const prof_bon = 2; // Пример, как задать бонус мастерства
                 const attackBonus = prof_bon + Number(baseCharValue);
-                const damage = `${weapon.hit_die} + ${baseCharValue}`;
+                const damage = `${weapon.hit_die} + ${Number(baseCharValue)}`;
 
                 // Создаем div для бонуса атаки и урона
                 const attackBonusDiv = document.createElement('div');
@@ -975,6 +990,5 @@ async function parseClass(event) {
         savingThrows[i].textContent = "";
     }
     updateData()
-    updateWeaponChoices(event.target.value)
   }
 
