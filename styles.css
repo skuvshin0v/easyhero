@@ -327,6 +327,14 @@ select:focus {
     font-size: 16px;
 }
 
+.magic-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+}
+
 .armor {
     grid-area: armor;
     font-family: "Roboto";
@@ -469,8 +477,8 @@ select:focus {
     "general general"
     "abilities abilities"
     "specials  weapons"
-    "specials  armor"
-    "magic inventory"
+    "inventory   armor"
+    "magic magic"
     "save-pdf save-pdf";
     row-gap: 10px;
     column-gap: 10px;

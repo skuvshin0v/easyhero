@@ -265,13 +265,13 @@ const armor_list = [
 const specials = [
     {
         id: "rage",
-        name: `Ярость /3`,
-        description: "Вы можете войти в состояние ярости 3 раза в сутки. В ярости, вы совершаете с преимуществом все проверки Силы. Если вы совершаете рукопашную атаку оружием через Силу, прибавьте к урону +2. Вы получаете сопротивление урону."
+        name: `Ярость (3 раза)`,
+        description: "Ярость длится 1 минуту (10 ходов).Вы получаете +2 к урону, а весь урон оружием по вам делится пополам. Вы совершаете с преимуществом атаки и проверки по Силе"
     },
     {
         id: "barb-no-armor",
         name: "Защита без доспехов",
-        description: `Если вы не носите доспехов, ваш КД равен 10 + Ловкость + Выносливость`
+        description: `Если вы не носите доспехов, ваша Броня равна 10 + Ловкость + Выносливость`
     },
     {
         id: "sense-of-danger",
@@ -321,41 +321,65 @@ const specials = [
     {
         id: "monk-no-armor",
         name: "Защита без доспехов",
-        description: `Если вы не носите доспехов, ваш КД равен 10 + Ловкость + Мудрость`
+        description: `Если вы не носите доспехов, ваша Броня равна 10 + Ловкость + Мудрость`
+    },
+    {
+        id: "duel",
+        name: "Дуэлянт",
+        description: "Пока вы держите рукопашное оружие в одной руке и не используете другого оружия, вы получаете бонус +2 к броскам урона этим оружием."
+    },
+    {
+        id: "competence",
+        name: "Компетентность",
+        description: "Прибавьте +2 к проверкам при использовании воровских инструментов"
+    },
+    {
+        id: "stealth-attack",
+        name: "Скрытая атака",
+        description: "Добавьте +1d6 урона, если атакуете из скрытности, застали цель врасплох или имеете преимущество на атаку"
+    },
+    {
+        id: "bazar",
+        name: "Воровской жаргон",
+        description: "Вы понимаете тайный язык воров и можете скрывать сообщения в обычных разговорах. Также распознаёте специальные символы, указывающие на опасности, территории воров и укрытия."
+    },
+    {
+        id: "rogue-action",
+        name: "Хитрое действие",
+        description: "Вы можете в каждом своем ходу боя совершать бонусное действие для Рывка, Отхода или Засады"
+    },
+    {
+        id: "magic-recovery",
+        name: "Магическое восстановление",
+        description: "После отдыха ты восстанавливаешь все заряды"
+    },
+    {
+        id: "portent",
+        name: "Волшебное знамение",
+        description: "Сделайте два броска d20 и запишите их результаты. В течение дня вы можете заменить любой бросок на один из этих результатов"
     },
     {
         id: "",
         name: "",
         description: ""
     },
-    {
-        id: "",
-        name: "",
-        description: ""
-    },
-    {
-        id: "",
-        name: "",
-        description: ""
-    },
-    // Добавляй другие способности
 ];
 
 const charms = [
     {
         id: "mage-hand",
         name: "Волшебная рука",
-        description: "У вас появляется волшебная рука"
+        description: "В пределах 30 футов от вас появляется призрачная рука (копия вашей). Она может передвигать предметы, открывать незаперте двери, наливать жидкости, дотрагиваться до существ,но не может совершать атаки"
     },
     {
-        id: "charm1",
-        name: "",
-        description: ""
+        id: "blade-ward",
+        name: "Защита от оружия",
+        description: "До конца следующего хода вы получаете сопротивление к дробящему, колющему и рубящему урону от оружия."
     },
     {
-        id: "charm1",
-        name: "",
-        description: ""
+        id: "minor-illusion",
+        name: "Малая иллюзия",
+        description: "Вы создаёте иллюзию звука или предмета в пределах 30 футов на 1 минуту. Звук может быть от шепота до крика, а предмет должен помещаться в куб 5 футов. Иллюзия исчезает, если её исследовать или использовать заклинание повторно."
     },
     {
         id: "charm1",
@@ -388,7 +412,32 @@ const spells = [
     {
         id: "magic-missile",
         name: "Волшебная стрела (1 заряд)",
-        description: "Ты можешь запустить волшебную стрелу"
+        description: "Вы создаёте три светящихся дротика, которые автоматически поражают выбранные вами цели в пределах дистанции. Каждый дротик наносит 1к4 + 1 урона силовым полем. Все дротики атакуют одновременно, и вы можете направить их в одну или несколько целей"
+    },
+    {
+        id: "disguise",
+        name: "Маскировка (1 заряд)",
+        description: "Вы создаёте иллюзию, изменяющую ваш внешний вид на 1 час. Вы можете выглядеть выше, ниже, толще или худее, но не изменить количество конечностей. Иллюзия не выдерживает физического контакта — те, кто дотронутся, заметят несоответствия"
+    },
+    {
+        id: "unseen-servant",
+        name: "Невидимый слуга (1 заряд)",
+        description: "Вы создаёте невидимую силу, которая выполняет простые команды, такие как подношение предметов, уборка или разжигание костра. Слуга действует 1 час, имеет 1 хит и не может атаковать. Вы можете управлять им на расстоянии до 60 футов, давая команды как бонусное действие. Если слуга выходит за пределы этой дистанции или его хиты падают до 0, заклинание заканчивается"
+    },
+    {
+        id: "detect-magic",
+        name: "Обнаружение магии (1 заряд)",
+        description: "В течение 10 минут вы чувствуете присутствие магии в пределах 30 футов. Вы можете увидеть ауру вокруг магических объектов или существ и определить школу магии"
+    },
+    {
+        id: "absorb-elements",
+        name: "Поглощение стихий (1 заряд)",
+        description: "Когда вы получаете урон от звука, кислоты, огня, холода или электричества, вы можете поглотить часть энергии, получив сопротивление к этому урону до начала вашего следующего хода. В свою следующую рукопашную атаку вы добавляете 1к6 урона этого же типа, после чего заклинание заканчивается"
+    },
+    {
+        id: "sleep",
+        name: "Усыпление (1 заряд)",
+        description: "Вы погружаете существ в пределах 20 футов от выбранной точки в магический сон. Бросьте 5к8, чтобы определить общее количество хитов, которые могут быть затронуты. Заклинание действует на существ с наименьшим количеством текущих хитов, пока не исчерпается сумма. Спящие существа просыпаются при получении урона или если их разбудят. Нежить и существа, устойчивые к очарованию, не поддаются заклинанию"
     },
     {
         id: "",
@@ -483,11 +532,8 @@ const inventory = [
 ]
 
 
-
-
-
-
 const class_properties = {
+    //ready
     barbarian: {
         name: "Варвар",
         specials: ["rage","barb-no-armor","sense-of-danger"],
@@ -499,7 +545,7 @@ const class_properties = {
         ],
         armor: ["no-armor-barbarian","light1", "light2", "light3", 
                 "middle1", "middle2", "middle3", "middle4", "middle5",],
-        skills: [],
+        skills: ["skill-athletics","skill-survival"],
         charms: [],
         spells: [],
         inventory: ["traveller-pack"]
@@ -538,9 +584,10 @@ const class_properties = {
         spells: [],
         inventory: ["traveller-pack","druidic-focus"]
     },
+    //ready
     fighter: {
         name: "Воин",
-        specials: ["warrior-second-breath","warrior-actions"],
+        specials: ["warrior-second-breath","warrior-actions","duel"],
         weapons: ["battle8","battle20","shield","light2", "battle15","battle3","light4","light1", "light3", "light5", "light6", "light7", "light8", "light9", "light10", 
             "light11", "light12", "light13", "light14", "battle1", "battle2", "battle4", "battle5", 
             "battle6", "battle7",  "battle9", "battle10", "battle11", "battle12", "battle13", "battle14", 
@@ -548,7 +595,7 @@ const class_properties = {
         armor: ["heavy2","no-armor","light1", "light2", "light3", 
                 "middle1", "middle2", "middle3", "middle4", "middle5",
                 "heavy1","heavy3","heavy4",],
-        skills: [],
+        skills: ["skill-athletics","skill-perception"],
         charms: [],
         spells: [],
         inventory: ["traveller-pack"]
@@ -593,13 +640,14 @@ const class_properties = {
         spells: [],
         inventory: ["dungeon-pack",]
     },
+    //ready
     rogue: {
         name: "Плут",
-        specials: [],
+        specials: ["competence","stealth-attack","bazar","rogue-action"],
         weapons: ["battle20","battle10","battle14","light1","battle8", "light2", "light3", "light4", "light5", "light6", "light7", "light8", "light9", "light10", 
     "light11", "light12", "light13", "light14",],
         armor: ["light2","no-armor","light1","light3",],
-        skills: [],
+        skills: ["skill-stealth","skill-sleight-of-hand","skill-deception","skill-perception"],
         charms: [],
         spells: [],
         inventory: ["burglars-pack","thief-tools"]
@@ -627,12 +675,12 @@ const class_properties = {
     },
     wizard: {
         name: "Волшебник",
-        specials: [],
+        specials: ["magic-recovery","portent"],
         weapons: ["light1","light12","light4","light11","light14",],
         armor: ["no-armor"],
         skills: [],
-        charms: ["mage-hand"],
-        spells: ["magic-missile"],
+        charms: ["mage-hand","blade-ward","minor-illusion"],
+        spells: ["magic-missile","sleep","unseen-servant","absorb-elements","disguise","detect-magic"],
         inventory: ["scholars-pack","spellbook","component-pouch"]
     }
 };
