@@ -149,7 +149,7 @@ p {
     outline-color: #CC5803;
 }
 
-select {
+.weapon-select, .armor-select {
     height: 37px;
     background: transparent;
     font-family: 'Roboto';
@@ -158,6 +158,7 @@ select {
     width: 100%;
     border-radius: 5px;
     border-color: #4D3F37;
+    margin-bottom: 10px;
 }
 
 select:focus {
@@ -300,6 +301,13 @@ select:focus {
     font-size: 16px;
 }
 
+.attack-bonus {
+    font-family: "Oswald";
+    font-size: 18px;
+    margin: 0px;
+}
+
+
 
 .inventory {
     grid-area: inventory;
@@ -313,14 +321,26 @@ select:focus {
     font-size: 16px;
 }
 
-.specials h4, .weapons h4, .inventory h4 {
+.magic {
+    grid-area: magic;
+    font-family: "Roboto";
+    font-size: 16px;
+}
+
+.armor {
+    grid-area: armor;
+    font-family: "Roboto";
+    font-size: 16px;
+}
+
+.specials h4, .weapons h4, .inventory h4, .magic h4, .armor h4 {
     font-family: "Oswald";
     margin-top: 5px;
     margin-bottom: 5px;
     font-size: 20px;
 }
 
-.specials p, .weapons p, .inventory p  {
+.specials p, .weapons p, .inventory p, .magic p, .armor p {
     font-family: "Roboto";
     font-size: 16px;
     margin-top: 5px;
@@ -432,14 +452,15 @@ select:focus {
 .builder {
     display: grid;
     grid-template-areas:
-    "general general general"
-    "abilities abilities abilities"
-    "specials specials weapons "
-    "specials specials inventory "
-    "save-pdf save-pdf save-pdf";
+    "general  general"
+    "abilities  abilities"
+    "specials  weapons "
+    "magic  inventory "
+    ". armor"
+    "save-pdf save-pdf ";
     row-gap: 10px;
     column-gap: 10px;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
 }
 
 
@@ -765,7 +786,9 @@ h1 {
       "general"
       "abilities"
       "specials"
+      "magic"
       "weapons"
+      "armor"
       "inventory"
       "save-pdf";
     }

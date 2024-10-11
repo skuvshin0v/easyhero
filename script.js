@@ -255,7 +255,8 @@ const armor_list = [
     { id: "heavy2", name: "Кольчуга", dex: false, arm_value: 16 },
     { id: "heavy3", name: "Наборный доспех", dex: false, arm_value: 17 },
     { id: "heavy4", name: "Латы", dex: false, arm_value: 18 },
-    { id: "no-armour-barbarian", name: "Без доспехов", dex: false, arm_value: 10+document.getElementById("dex").innerText+document.getElementById("con").innerText },
+    { id: "no-armor-barbarian", name: "Без доспехов", dex: false, arm_value: 10+document.getElementById("dex").innerText+document.getElementById("con").innerText },
+    { id: "no-armor-monk", name: "Без доспехов", dex: false, arm_value: 10+document.getElementById("dex").innerText+document.getElementById("wis").innerText },
     { id: "no-armor", name: "Без доспехов", dex: true, arm_value: 10 },
 
 ];
@@ -263,24 +264,79 @@ const armor_list = [
 const specials = [
     {
         id: "rage",
-        name: "Дикая ярость",
-        description: "Описание способности."
+        name: `Ярость /3`,
+        description: "Вы можете войти в состояние ярости 3 раза в сутки. В ярости, вы совершаете с преимуществом все проверки Силы. Если вы совершаете рукопашную атаку оружием через Силу, прибавьте к урону +2. Вы получаете сопротивление урону."
     },
     {
-        id: "no-armor",
+        id: "barb-no-armor",
         name: "Защита без доспехов",
-        description: "Описание способности."
-    },
-    {
-        id: "crazy-attack",
-        name: "Безрассудная атака",
-        description: "Описание способности."
+        description: `Если вы не носите доспехов, ваш КД равен 10 + Ловкость + Выносливость`
     },
     {
         id: "sense-of-danger",
         name: "Чувство опасности",
-        description: "Описание способности."
-    }
+        description: "Вы совершаете с преимуществом спасброски Ловкости от эффектов, которые вы можете видеть, такие как заклинания и ловушки."
+    },
+    {
+        id: "bard-inspiration",
+        name: "Вдохновление барда",
+        description: "Своими словами или музыкой вы можете вдохновить одно существо. Оно получает кость бардовского вдохновения — к6. Можете использовать в сутки количество раз равное Харизме."
+    },
+    {
+        id: "bard-master",
+        name: "Мастер на все руки",
+        description: "Прибавьте +1 к проверкам тех навыков, которыми вы не владеете"
+    },
+    {
+        id: "bard-song",
+        name: "Песнь отдыха",
+        description: "Вы с помощью успокаивающей музыки или речей можете помочь своим раненым союзникам восстановить 1к6 хитов во время короткого отдыха."
+    },
+    {
+        id: "druid-lang",
+        name: "Друидический язык",
+        description: "Вы знаете Друидический язык — тайный язык друидов. Вы можете на нём говорить и оставлять тайные послания."
+    },
+    {
+        id: "druid-change",
+        name: "Дикий облик",
+        description: "Действием вы можете 2 раза в сутки магическим образом принять облик любого зверя, которого вы видели."
+    },
+    {
+        id: "druid-sputnik",
+        name: "Дикий спутник",
+        description: "Вы получаете способность призывать духа, который принимает форму животного."
+    },
+    {
+        id: "warrior-second-breath",
+        name: "Второе дыхание",
+        description: "Раз в сутки в свой ход вы можете бонусным действием восстановить 1к10 + 2 хитов"
+    },
+    {
+        id: "warrior-actions",
+        name: "Всплекск действий",
+        description: "Раз в сутки вы можете совершить одно дополнительное действие помимо обычного и бонусного действий."
+    },
+    {
+        id: "monk-no-armor",
+        name: "Защита без доспехов",
+        description: `Если вы не носите доспехов, ваш КД равен 10 + Ловкость + Мудрость`
+    },
+    {
+        id: "",
+        name: "",
+        description: ""
+    },
+    {
+        id: "",
+        name: "",
+        description: ""
+    },
+    {
+        id: "",
+        name: "",
+        description: ""
+    },
     // Добавляй другие способности
 ];
 
@@ -288,14 +344,14 @@ const specials = [
 const class_properties = {
     barbarian: {
         name: "Варвар",
-        specials: ["rage","crazy-attack","sense-of-danger"],
+        specials: ["rage","barb-no-armor","sense-of-danger"],
         weapons: [
             "battle15","battle3","light4","light1", "light2", "light3", "light5", "light6", "light7", "light8", "light9", "light10", 
             "light11", "light12", "light13", "light14", "battle1", "battle2", "battle4", "battle5", 
             "battle6", "battle7", "battle8", "battle9", "battle10", "battle11", "battle12", "battle13", "battle14", 
              "battle16", "battle17", "battle18", "battle19", "battle20", "battle21"
         ],
-        armor: ["light1", "light2", "light3", 
+        armor: ["no-armor-barbarian","light1", "light2", "light3", 
                 "middle1", "middle2", "middle3", "middle4", "middle5",],
         skills: [],
         charms: [],
@@ -304,7 +360,7 @@ const class_properties = {
     },
     bard: {
         name: "Бард",
-        specials: [],
+        specials: ["bard-inspiration","bard-master","bard-song"],
         weapons: ["battle14","battle10","battle19","battle8","light4","light1", "light2", "light3", "light5", "light6", "light7", "light8", "light9", "light10", 
             "light11", "light12", "light13", "light14",],
         armor: [],
@@ -326,7 +382,7 @@ const class_properties = {
     },
     druid: {
         name: "Друид",
-        specials: [],
+        specials: ["druid-lang","druid-change","druid-sputnik"],
         weapons: ["light1","battle16","light14","light2","light3","light4","light5","light7","light10",],
         armor: [],
         skills: [],
@@ -336,7 +392,7 @@ const class_properties = {
     },
     fighter: {
         name: "Воин",
-        specials: [],
+        specials: ["warrior-second-breath","warrior-actions"],
         weapons: ["battle8","battle20","light2", "battle15","battle3","light4","light1", "light3", "light5", "light6", "light7", "light8", "light9", "light10", 
             "light11", "light12", "light13", "light14", "battle1", "battle2", "battle4", "battle5", 
             "battle6", "battle7",  "battle9", "battle10", "battle11", "battle12", "battle13", "battle14", 
@@ -422,11 +478,111 @@ const class_properties = {
         weapons: ["light1","light12","light4","light11","light14",],
         armor: [],
         skills: [],
-        charms: [],
-        spells: [],
-        inventory: []
+        charms: ["mage-hand"],
+        spells: ["magic-missile"],
+        inventory: ["traveler-pack"]
     }
 };
+
+
+const charms = [
+    {
+        id: "mage-hand",
+        name: "Волшебная рука",
+        description: "У вас появляется волшебная рука"
+    },
+    {
+        id: "charm1",
+        name: "",
+        description: ""
+    },
+    {
+        id: "charm1",
+        name: "",
+        description: ""
+    },
+    {
+        id: "charm1",
+        name: "",
+        description: ""
+    },
+    {
+        id: "charm1",
+        name: "",
+        description: ""
+    },
+    {
+        id: "charm1",
+        name: "",
+        description: ""
+    },
+    {
+        id: "charm1",
+        name: "",
+        description: ""
+    },
+    {
+        id: "charm1",
+        name: "",
+        description: ""
+    },
+];
+
+const spells = [
+    {
+        id: "magic-missile",
+        name: "Волшебная стрела (1 заряд)",
+        description: "Ты можешь запустить волшебную стрелу"
+    },
+    {
+        id: "",
+        name: "",
+        description: ""
+    },
+    {
+        id: "",
+        name: "",
+        description: ""
+    },
+    {
+        id: "",
+        name: "",
+        description: ""
+    },
+
+]
+
+
+const inventory = [
+    {
+        id: "traveler-pack",
+        name: "Набор путешественника",
+        description: "Рюкзак, спальник, столовый набор, трутница, 10 факелов, рационы на 10 дней и бурдюк. В набор также входит 50-футовая пеньковая верёвка"
+    },
+    {
+        id: "",
+        name: "",
+        description: ""
+    },
+    {
+        id: "",
+        name: "",
+        description: ""
+    },
+    {
+        id: "",
+        name: "",
+        description: ""
+    },
+]
+
+
+
+
+
+
+
+
 
 
 //Функции, которые выполняются при запуске приложения
@@ -443,7 +599,6 @@ function updateData () {
     updateHealth ()
     updateSavingThrows ()
     removeRedOutlineOnInput()
-    updateWeaponChoices(document.getElementById("class").value)
     updatePDF () // Потом убрать??
 }
 
@@ -746,6 +901,7 @@ function updateWeaponChoices(selectedClass) {
 
     // Создаем селектор для основного оружия (select1)
     const select1 = document.createElement('select');
+    select1.classList.add('weapon-select')
     classWeapons.forEach((weaponId, index) => {
         const option = createWeaponOption(weaponId);
         if (index === 0) option.selected = true; // По умолчанию первая опция
@@ -756,6 +912,7 @@ function updateWeaponChoices(selectedClass) {
 
     // Создаем селектор для дополнительного оружия (select2)
     const select2 = document.createElement('select');
+    select2.classList.add('weapon-select')
     classWeapons.forEach((weaponId, index) => {
         const option = createWeaponOption(weaponId);
         if (index === 1) option.selected = true; // По умолчанию вторая опция
@@ -766,6 +923,7 @@ function updateWeaponChoices(selectedClass) {
 
     // Создаем селектор для дополнительного оружия (select3)
     const select3 = document.createElement('select');
+    select3.classList.add('weapon-select')
     classWeapons.forEach((weaponId, index) => {
         const option = createWeaponOption(weaponId);
         if (index === 2) option.selected = true; // По умолчанию третья опция
@@ -801,6 +959,7 @@ function updateWeaponChoices(selectedClass) {
                 // Если есть описание, добавляем p
                 if (weapon.description) {
                     const descriptionP = document.createElement('p');
+                    descriptionP.classList.add('weapon-desc');
                     descriptionP.textContent = weapon.description;
                     weaponsDescriptionsDiv.appendChild(descriptionP);
                 }
@@ -817,6 +976,207 @@ function updateWeaponChoices(selectedClass) {
     updateWeaponDescription();
 }
 
+function updateClassSpecials(selectedClass) {
+    // Получаем div, куда будем добавлять специальные способности
+    const specialsDiv = document.getElementById('specials');
+    
+    // Очищаем содержимое div перед добавлением новых данных
+    specialsDiv.innerHTML = '';
+
+    // Проверяем, выбран ли класс и существует ли он в class_properties
+    if (!selectedClass || !class_properties[selectedClass]) return;
+
+    // Получаем список id специальных умений для выбранного класса
+    const classSpecials = class_properties[selectedClass].specials;
+
+    // Перебираем специальные умения, соответствующие выбранному классу
+    classSpecials.forEach(specialId => {
+        // Находим специальное умение по его id
+        const special = specials.find(s => s.id === specialId);
+
+        // Если специальное умение найдено, добавляем его в div
+        if (special) {
+            // Создаем элемент h4 для названия специального умения
+            const specialTitle = document.createElement('h4');
+            specialTitle.textContent = special.name;
+            specialsDiv.appendChild(specialTitle);
+
+            // Создаем элемент p для описания специального умения
+            const specialDescription = document.createElement('p');
+            specialDescription.textContent = special.description;
+            specialsDiv.appendChild(specialDescription);
+        }
+    });
+}
+
+
+function updateClassCharms(selectedClass) {
+    // Получаем div, куда будем добавлять заговоры
+    const charmsDiv = document.getElementById('charms');
+    
+    // Очищаем содержимое div перед добавлением новых данных
+    charmsDiv.innerHTML = '';
+
+    // Проверяем, выбран ли класс и существует ли он в class_properties
+    if (!selectedClass || !class_properties[selectedClass]) return;
+
+    // Получаем список id заговоров для выбранного класса
+    const classCharms = class_properties[selectedClass].charms;
+
+    // Перебираем заговоры, соответствующие выбранному классу
+    classCharms.forEach(charmId => {
+        // Находим заговор по его id
+        const charm = charms.find(c => c.id === charmId);
+
+        // Если заговор найден, добавляем его в div
+        if (charm) {
+            // Создаем элемент h4 для названия заговора
+            const charmTitle = document.createElement('h4');
+            charmTitle.textContent = charm.name;
+            charmsDiv.appendChild(charmTitle);
+
+            // Создаем элемент p для описания заговора
+            const charmDescription = document.createElement('p');
+            charmDescription.textContent = charm.description;
+            charmsDiv.appendChild(charmDescription);
+        }
+    });
+}
+
+
+function updateClassSpells(selectedClass) {
+    // Получаем div, куда будем добавлять заклинания
+    const spellsDiv = document.getElementById('spells');
+    
+
+
+    // Проверяем, выбран ли класс и существует ли он в class_properties
+    if (!selectedClass || !class_properties[selectedClass]) return;
+
+    // Получаем список id заклинаний для выбранного класса
+    const classSpells = class_properties[selectedClass].spells;
+
+    if (classSpells.length >0) {
+            // Очищаем содержимое div перед добавлением новых данных
+        spellsDiv.innerHTML = '';
+    } else {
+        spellsDiv.innerHTML = 'У выбранного класса нет заклинаний';
+
+    }
+
+    // Перебираем заклинания, соответствующие выбранному классу
+    classSpells.forEach(spellId => {
+        // Находим заклинание по его id
+        const spell = spells.find(s => s.id === spellId);
+
+        // Если заклинание найдено, добавляем его в div
+        if (spell) {
+            // Создаем элемент h4 для названия заклинания
+            const spellTitle = document.createElement('h4');
+            spellTitle.textContent = spell.name;
+            spellsDiv.appendChild(spellTitle);
+
+            // Создаем элемент p для описания заклинания
+            const spellDescription = document.createElement('p');
+            spellDescription.textContent = spell.description;
+            spellsDiv.appendChild(spellDescription);
+        }
+    });
+}
+
+function updateClassInventory(selectedClass) {
+    // Получаем div, куда будем добавлять предметы инвентаря
+    const inventoryDiv = document.querySelector('.inventory-container');
+    
+    // Очищаем содержимое div перед добавлением новых данных
+    inventoryDiv.innerHTML = '';
+
+    // Проверяем, выбран ли класс и существует ли он в class_properties
+    if (!selectedClass || !class_properties[selectedClass]) return;
+
+    // Получаем список id предметов инвентаря для выбранного класса
+    const classInventory = class_properties[selectedClass].inventory;
+
+    // Перебираем предметы инвентаря, соответствующие выбранному классу
+    classInventory.forEach(itemId => {
+        // Находим предмет по его id
+        const item = inventory.find(i => i.id === itemId);
+
+        // Если предмет найден, добавляем его в div
+        if (item) {
+            // Создаем элемент h4 для названия предмета
+            const itemTitle = document.createElement('h4');
+            itemTitle.textContent = item.name;
+            inventoryDiv.appendChild(itemTitle);
+
+            // Создаем элемент p для описания предмета
+            if (item.description) {
+                const itemDescription = document.createElement('p');
+                itemDescription.textContent = item.description;
+                inventoryDiv.appendChild(itemDescription);
+            }
+        }
+    });
+}
+
+
+function updateArmorSelector(selectedClass) {
+    // Получаем div, куда будем добавлять селектор брони
+    const armorDiv = document.querySelector('.armor-container');
+    
+    // Очищаем содержимое div перед добавлением новых данных
+    armorDiv.innerHTML = '';
+
+    // Проверяем, выбран ли класс и существует ли он в class_properties
+    if (!selectedClass || !class_properties[selectedClass]) return;
+
+    // Получаем список id брони для выбранного класса
+    const classArmor = class_properties[selectedClass].armor;
+
+    // Если у класса нет доступной брони, ничего не делаем
+    if (classArmor.length === 0) return;
+
+    // Создаем элемент select
+    const armorSelect = document.createElement('select');
+    armorSelect.classList.add('armor-select');
+
+    // Заполняем select опциями брони
+    classArmor.forEach((armorId, index) => {
+        const armorItem = armor_list.find(a => a.id === armorId); // Используем правильное название массива armor_list
+        if (armorItem) {
+            const option = document.createElement('option');
+            option.value = armorItem.id;
+            option.textContent = armorItem.name;
+            if (index === 0) option.selected = true; // Первая опция по умолчанию
+            armorSelect.appendChild(option);
+        }
+    });
+
+    // Добавляем select в div
+    armorDiv.appendChild(armorSelect);
+
+    // Функция для обновления значения брони
+    function updateArmorValue() {
+        const selectedArmorId = armorSelect.value;
+        const selectedArmor = armor_list.find(a => a.id === selectedArmorId); // Используем правильное название массива armor_list
+        let armorValue = selectedArmor.arm_value;
+
+        // Проверяем, добавляется ли модификатор Ловкости
+        if (selectedArmor.dex) {
+            const dexValue = parseInt(document.getElementById("dex").innerText, 10);
+            armorValue += dexValue;
+        }
+
+        // Обновляем значение брони в элементе с id="armor-value"
+        document.getElementById("armor-value").innerText = armorValue;
+    }
+
+    // Обновляем значение брони при изменении выбора
+    armorSelect.addEventListener('change', updateArmorValue);
+
+    // Устанавливаем начальное значение брони
+    updateArmorValue();
+}
 
 //Функция, которая сохраняет полученные через API бонусы в соответствующие переменные
 function applyBonuses (a_b) {
@@ -989,6 +1349,13 @@ async function parseClass(event) {
     for (let i = 0; i < savingThrows.length; i++) {
         savingThrows[i].textContent = "";
     }
+    updateWeaponChoices(event.target.value)
+    updateClassSpecials(event.target.value)
+    updateClassCharms(event.target.value)
+    updateClassSpells(event.target.value)
+    updateClassInventory(event.target.value)
+    updateArmorSelector(event.target.value)
+
     updateData()
   }
 
