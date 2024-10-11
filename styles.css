@@ -449,7 +449,7 @@ select:focus {
     text-align: center;
 }
 
-.builder {
+/* .builder {
     display: grid;
     grid-template-areas:
     "general  general"
@@ -458,6 +458,20 @@ select:focus {
     "magic  inventory "
     ". armor"
     "save-pdf save-pdf ";
+    row-gap: 10px;
+    column-gap: 10px;
+    grid-template-columns: 1fr 1fr;
+} */
+
+.builder {
+    display: grid;
+    grid-template-areas:
+    "general general"
+    "abilities abilities"
+    "specials  weapons"
+    "specials  armor"
+    "magic inventory"
+    "save-pdf save-pdf";
     row-gap: 10px;
     column-gap: 10px;
     grid-template-columns: 1fr 1fr;

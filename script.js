@@ -239,7 +239,9 @@ const weapons_list = [
     { id: "battle18", name: "Цеп", base_char: "dex", hit_die: "1d8", description: "" },
     { id: "battle19", name: "Ручной арбалет", base_char: "dex", hit_die: "1d6", description: "Можно сражаться двумя оружиями" },
     { id: "battle20", name: "Тяжёлый арбалет", base_char: "dex", hit_die: "1d10", description: "Необходимо держать двумя руками" },
-    { id: "battle21", name: "Длинный лук", base_char: "dex", hit_die: "1d8", description: "Необходимо держать двумя руками" }
+    { id: "battle21", name: "Длинный лук", base_char: "dex", hit_die: "1d8", description: "Необходимо держать двумя руками" },
+    { id: "shield", name: "Щит", base_char: "str", hit_die: "1d4", description: "При использовании щита во время боя прибавьте +2 к Броне" },
+
 ];
 
 const armor_list = [
@@ -339,151 +341,6 @@ const specials = [
     // Добавляй другие способности
 ];
 
-
-const class_properties = {
-    barbarian: {
-        name: "Варвар",
-        specials: ["rage","barb-no-armor","sense-of-danger"],
-        weapons: [
-            "battle15","battle3","light4","light1", "light2", "light3", "light5", "light6", "light7", "light8", "light9", "light10", 
-            "light11", "light12", "light13", "light14", "battle1", "battle2", "battle4", "battle5", 
-            "battle6", "battle7", "battle8", "battle9", "battle10", "battle11", "battle12", "battle13", "battle14", 
-             "battle16", "battle17", "battle18", "battle19", "battle20", "battle21"
-        ],
-        armor: ["no-armor-barbarian","light1", "light2", "light3", 
-                "middle1", "middle2", "middle3", "middle4", "middle5",],
-        skills: [],
-        charms: [],
-        spells: [],
-        inventory: []
-    },
-    bard: {
-        name: "Бард",
-        specials: ["bard-inspiration","bard-master","bard-song"],
-        weapons: ["battle14","battle10","battle19","battle8","light4","light1", "light2", "light3", "light5", "light6", "light7", "light8", "light9", "light10", 
-            "light11", "light12", "light13", "light14",],
-        armor: [],
-        skills: [],
-        charms: [],
-        spells: [],
-        inventory: []
-    },
-    cleric: {
-        name: "Жрец",
-        specials: [],
-        weapons: ["light1","light10","light4", "light2", "light3", "light5", "light6", "light7", "light8", "light9", 
-            "light11", "light12", "light13", "light14"],
-        armor: [],
-        skills: [],
-        charms: [],
-        spells: [],
-        inventory: []
-    },
-    druid: {
-        name: "Друид",
-        specials: ["druid-lang","druid-change","druid-sputnik"],
-        weapons: ["light1","battle16","light14","light2","light3","light4","light5","light7","light10",],
-        armor: [],
-        skills: [],
-        charms: [],
-        spells: [],
-        inventory: []
-    },
-    fighter: {
-        name: "Воин",
-        specials: ["warrior-second-breath","warrior-actions"],
-        weapons: ["battle8","battle20","light2", "battle15","battle3","light4","light1", "light3", "light5", "light6", "light7", "light8", "light9", "light10", 
-            "light11", "light12", "light13", "light14", "battle1", "battle2", "battle4", "battle5", 
-            "battle6", "battle7",  "battle9", "battle10", "battle11", "battle12", "battle13", "battle14", 
-             "battle16", "battle17", "battle18", "battle19", "battle21"],
-        armor: [],
-        skills: [],
-        charms: [],
-        spells: [],
-        inventory: []
-    },
-    monk: {
-        name: "Монах",
-        specials: [],
-        weapons: ["light1","battle10","light4","light2", "light3", "light5", "light6", "light7", "light8", "light9", "light10", 
-            "light11", "light12", "light13", "light14"],
-        armor: [],
-        skills: [],
-        charms: [],
-        spells: [],
-        inventory: []
-    },
-    paladin: {
-        name: "Паладин",
-        specials: [],
-        weapons: ["battle8","battle20","light2", "battle15","battle3","light4","light1", "light3", "light5", "light6", "light7", "light8", "light9", "light10", 
-            "light11", "light12", "light13", "light14", "battle1", "battle2", "battle4", "battle5", 
-            "battle6", "battle7",  "battle9", "battle10", "battle11", "battle12", "battle13", "battle14", 
-             "battle16", "battle17", "battle18", "battle19", "battle21"],
-        armor: [],
-        skills: [],
-        charms: [],
-        spells: [],
-        inventory: []
-    },
-    ranger: {
-        name: "Следопыт",
-        specials: [],
-        weapons: ["battle21", "battle10","light4","battle8","battle20","light2", "battle15","battle3","light1", "light3", "light5", "light6", "light7", "light8", "light9", "light10", 
-            "light11", "light12", "light13", "light14", "battle1", "battle2", "battle4", "battle5", 
-            "battle6", "battle7",  "battle9", "battle11", "battle12", "battle13", "battle14", 
-             "battle16", "battle17", "battle18", "battle19", ],
-        armor: [],
-        skills: [],
-        charms: [],
-        spells: [],
-        inventory: []
-    },
-    rogue: {
-        name: "Плут",
-        specials: [],
-        weapons: ["battle20","battle10","battle14","light1","battle8", "light2", "light3", "light4", "light5", "light6", "light7", "light8", "light9", "light10", 
-    "light11", "light12", "light13", "light14",],
-        armor: [],
-        skills: [],
-        charms: [],
-        spells: [],
-        inventory: []
-    },
-    sorcerer: {
-        name: "Чародей",
-        specials: [],
-        weapons: ["light1","light12","light4","light11","light14",],
-        armor: [],
-        skills: [],
-        charms: [],
-        spells: [],
-        inventory: []
-    },
-    warlock: {
-        name: "Колдун",
-        specials: [],
-        weapons: ["light1", "light2", "light3", "light4", "light5", "light6", "light7", "light8", "light9", "light10", 
-    "light11", "light12", "light13", "light14"],
-        armor: [],
-        skills: [],
-        charms: [],
-        spells: [],
-        inventory: []
-    },
-    wizard: {
-        name: "Волшебник",
-        specials: [],
-        weapons: ["light1","light12","light4","light11","light14",],
-        armor: [],
-        skills: [],
-        charms: ["mage-hand"],
-        spells: ["magic-missile"],
-        inventory: ["traveler-pack"]
-    }
-};
-
-
 const charms = [
     {
         id: "mage-hand",
@@ -554,14 +411,64 @@ const spells = [
 
 const inventory = [
     {
-        id: "traveler-pack",
+        id: "traveller-pack",
         name: "Набор путешественника",
         description: "Рюкзак, спальник, столовый набор, трутница, 10 факелов, рационы на 10 дней и бурдюк. В набор также входит 50-футовая пеньковая верёвка"
     },
     {
-        id: "",
-        name: "",
-        description: ""
+        id: "artist-pack",
+        name: "Набор артиста",
+        description: "Рюкзак, спальник, 2 костюма, 5 свечек, рационы на 5 дней, бурдюк и набор для грима"
+    },
+    {
+        id: "lute",
+        name: "Лютня",
+        description: "Музыкальный инструмент. При выступлении с ней, прибавьте 2 к проверке Исполнения"
+    },
+    {
+        id: "burglars-pack",
+        name: "Набор взломщика",
+        description: "Рюкзак, сумка с 1 000 металлических шариков, 10 футов лески, колокольчик, 5 свечек, ломик, молоток, 10 шлямбуров, закрытый фонарь, 2 фляги масла, рационы на 5 дней, трутница и бурдюк. В набор также входит 50-футовая пеньковая верёвка"
+    },
+    {
+        id: "thief-tools",
+        name: "Воровские инструменты",
+        description: "Небольшой напильник, набор отмычек, небольшое зеркальце на длинной ручке, ножницы, пара щипчиков"
+    },
+    {
+        id: "scholars-pack",
+        name: "Набор ученого",
+        description: "Рюкзак, научная книга, бутылочкуа чернил, писчее перо, 10 листов пергамента, небольшая сумочка с песком, небольшой нож."
+    },
+    {
+        id: "spellbook",
+        name: "Книга заклинаний",
+        description: "Книга, в которой записаны все известные вам заклинания. Вы можете изучать новые заклинания и записывать их в эту книгу."
+    },
+    {
+        id: "component-pouch",
+        name: "Мешочек с компонентами",
+        description: "Маленький водонепроницаемый кожаный поясной кошель с отделениями для хранения материальных компонентов и других особых предметов, нужных для накладывания заклинаний"
+    },
+    {
+        id: "priests-pack",
+        name: "Набор священника",
+        description: "Рюкзак одеяло, 10 свечек, трутница, коробка для пожертвований, 2 упаковки благовоний, кадило, облачение, рационы на 2 дня и бурдюк"
+    },
+    {
+        id: "holy-sign",
+        name: "Священный символ",
+        description: "Символ с вашим божеством в любой форме"
+    },
+    {
+        id: "dungeon-pack",
+        name: "Набор исследователя подземелий",
+        description: "Рюкзак, ломик, молоток, 10 шлямбуров, 10 факелов, трутница, рационы на 10 дней и бурдюк.В набор также входит 50-футовая пеньковая верёвка"
+    },
+    {
+        id: "druidic-focus",
+        name: "Фокусировка друида",
+        description: "Заклинательной фокусировкой друида может быть веточка омелы или падуба, жезл или скипетр из тиса или другого особого дерева, посох, выращенный целиком из живого дерева, или тотем, включающий перья, мех, кости и зубы священных животных. "
     },
     {
         id: "",
@@ -577,6 +484,158 @@ const inventory = [
 
 
 
+
+
+
+const class_properties = {
+    barbarian: {
+        name: "Варвар",
+        specials: ["rage","barb-no-armor","sense-of-danger"],
+        weapons: [
+            "battle15","battle3","light4","light1", "shield","light2", "light3", "light5", "light6", "light7", "light8", "light9", "light10", 
+            "light11", "light12", "light13", "light14", "battle1", "battle2", "battle4", "battle5", 
+            "battle6", "battle7", "battle8", "battle9", "battle10", "battle11", "battle12", "battle13", "battle14", 
+             "battle16", "battle17", "battle18", "battle19", "battle20", "battle21"
+        ],
+        armor: ["no-armor-barbarian","light1", "light2", "light3", 
+                "middle1", "middle2", "middle3", "middle4", "middle5",],
+        skills: [],
+        charms: [],
+        spells: [],
+        inventory: ["traveller-pack"]
+    },
+    bard: {
+        name: "Бард",
+        specials: ["bard-inspiration","bard-master","bard-song"],
+        weapons: ["battle14","battle10","battle19","battle8","light4","light1", "light2", "light3", "light5", "light6", "light7", "light8", "light9", "light10", 
+            "light11", "light12", "light13", "light14",],
+        armor: ["light2","no-armor","light1", "light3"],
+        skills: [],
+        charms: [],
+        spells: [],
+        inventory: ["artist-pack","lute"]
+    },
+    cleric: {
+        name: "Жрец",
+        specials: [],
+        weapons: ["light1","light10","shield","light4", "light2", "light3", "light5", "light6", "light7", "light8", "light9", 
+            "light11", "light12", "light13", "light14"],
+        armor: ["light1", "light2", "light3", 
+                "middle1", "middle2", "middle3", "middle4", "middle5","no-armor"],
+        skills: [],
+        charms: [],
+        spells: [],
+        inventory: ["priests-pack","holy-sign"]
+    },
+    druid: {
+        name: "Друид",
+        specials: ["druid-lang","druid-change","druid-sputnik"],
+        weapons: ["light1","battle16","light14","light2","shield","light3","light4","light5","light7","light10",],
+        armor: ["light1", "light2", "light3", 
+                "middle1", "middle2", "middle3", "middle4", "middle5","no-armor"],
+        skills: [],
+        charms: [],
+        spells: [],
+        inventory: ["traveller-pack","druidic-focus"]
+    },
+    fighter: {
+        name: "Воин",
+        specials: ["warrior-second-breath","warrior-actions"],
+        weapons: ["battle8","battle20","shield","light2", "battle15","battle3","light4","light1", "light3", "light5", "light6", "light7", "light8", "light9", "light10", 
+            "light11", "light12", "light13", "light14", "battle1", "battle2", "battle4", "battle5", 
+            "battle6", "battle7",  "battle9", "battle10", "battle11", "battle12", "battle13", "battle14", 
+             "battle16", "battle17", "battle18", "battle19", "battle21"],
+        armor: ["heavy2","no-armor","light1", "light2", "light3", 
+                "middle1", "middle2", "middle3", "middle4", "middle5",
+                "heavy1","heavy3","heavy4",],
+        skills: [],
+        charms: [],
+        spells: [],
+        inventory: ["traveller-pack"]
+    },
+    monk: {
+        name: "Монах",
+        specials: [],
+        weapons: ["light1","battle10","light4","light2", "light3", "light5", "light6", "light7", "light8", "light9", "light10", 
+            "light11", "light12", "light13", "light14"],
+        armor: ["no-armor-monk"],
+        skills: [],
+        charms: [],
+        spells: [],
+        inventory: ["dungeon-pack"]
+    },
+    paladin: {
+        name: "Паладин",
+        specials: [],
+        weapons: ["battle8","battle20","shield","light2", "battle15","battle3","light4","light1", "light3", "light5", "light6", "light7", "light8", "light9", "light10", 
+            "light11", "light12", "light13", "light14", "battle1", "battle2", "battle4", "battle5", 
+            "battle6", "battle7",  "battle9", "battle10", "battle11", "battle12", "battle13", "battle14", 
+             "battle16", "battle17", "battle18", "battle19", "battle21"],
+        armor: ["heavy2","no-armor","light1", "light2", "light3", 
+                "middle1", "middle2", "middle3", "middle4", "middle5",
+                "heavy1","heavy3","heavy4",],
+        skills: [],
+        charms: [],
+        spells: [],
+        inventory: ["priests-pack","holy-sign"]
+    },
+    ranger: {
+        name: "Следопыт",
+        specials: [],
+        weapons: ["battle21", "battle10","light4","shield","battle8","battle20","light2", "battle15","battle3","light1", "light3", "light5", "light6", "light7", "light8", "light9", "light10", 
+            "light11", "light12", "light13", "light14", "battle1", "battle2", "battle4", "battle5", 
+            "battle6", "battle7",  "battle9", "battle11", "battle12", "battle13", "battle14", 
+             "battle16", "battle17", "battle18", "battle19"],
+        armor: ["light1", "light2", "light3", 
+                "middle1", "middle2", "middle3", "middle4", "middle5","no-armor"],
+        skills: [],
+        charms: [],
+        spells: [],
+        inventory: ["dungeon-pack",]
+    },
+    rogue: {
+        name: "Плут",
+        specials: [],
+        weapons: ["battle20","battle10","battle14","light1","battle8", "light2", "light3", "light4", "light5", "light6", "light7", "light8", "light9", "light10", 
+    "light11", "light12", "light13", "light14",],
+        armor: ["light2","no-armor","light1","light3",],
+        skills: [],
+        charms: [],
+        spells: [],
+        inventory: ["burglars-pack","thief-tools"]
+    },
+    sorcerer: {
+        name: "Чародей",
+        specials: [],
+        weapons: ["light1","light12","light4","light11","light14",],
+        armor: ["no-armor"],
+        skills: [],
+        charms: [],
+        spells: [],
+        inventory: ["dungeon-pack","component-pouch"]
+    },
+    warlock: {
+        name: "Колдун",
+        specials: [],
+        weapons: ["light1", "light2", "light3", "light4", "light5", "light6", "light7", "light8", "light9", "light10", 
+    "light11", "light12", "light13", "light14"],
+        armor: ["light2","no-armor","light1","light3",],
+        skills: [],
+        charms: [],
+        spells: [],
+        inventory: ["scholars-pack","component-pouch"]
+    },
+    wizard: {
+        name: "Волшебник",
+        specials: [],
+        weapons: ["light1","light12","light4","light11","light14",],
+        armor: ["no-armor"],
+        skills: [],
+        charms: ["mage-hand"],
+        spells: ["magic-missile"],
+        inventory: ["scholars-pack","spellbook","component-pouch"]
+    }
+};
 
 
 
@@ -795,7 +854,7 @@ function updateSavingThrows() {
 function updateHealth () {
     let con_mod = Number(document.getElementById("con").innerText)
     console.log(con_mod)
-    health = hit_die+con_mod+(lvl-1)*(hit_die+con_mod)
+    health = hit_die+con_mod+(lvl-1)*(hit_die/2+1+con_mod)
     document.getElementById("hits").innerText=health
 }
 
@@ -842,8 +901,6 @@ function updateTraits(traits) {
             function updateDragonDescription() {
                 const selectedDragon = dragonSelect.value;
                 const dragon = dragon_list[selectedDragon];
-                
-                const prof_bon = 2; // Здесь укажи или вычисли бонус мастерства
                 const conBonus = document.getElementById("con").innerText; // Получаем значение Конс
 
                 descriptionP.innerHTML = `
@@ -949,7 +1006,6 @@ function updateWeaponChoices(selectedClass) {
 
                 // Рассчитываем бонус к атаке и урон
                 const baseCharValue = document.getElementById(weapon.base_char).innerText;
-                const prof_bon = 2; // Пример, как задать бонус мастерства
                 const attackBonus = prof_bon + Number(baseCharValue);
                 const damage = `${weapon.hit_die} + ${Number(baseCharValue)}`;
 
