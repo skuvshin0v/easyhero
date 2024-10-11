@@ -243,22 +243,21 @@ const weapons_list = [
 ];
 
 const armor_list = [
-    { id: "light1", name: "Стёганый доспех", dex: true, arm_value: 11 },
-    { id: "light2", name: "Кожаный доспех", dex: true, arm_value: 11 },
-    { id: "light3", name: "Проклёпанный кожаный доспех", dex: true, arm_value: 12 },
-    { id: "middle1", name: "Шкурный доспех", dex: true, arm_value: 12 },
-    { id: "middle2", name: "Кольчужная рубаха", dex: true, arm_value: 13 },
-    { id: "middle3", name: "Чешуйчатый доспех", dex: true, arm_value: 14 },
-    { id: "middle4", name: "Кираса", dex: true, arm_value: 14 },
-    { id: "middle5", name: "Полулаты", dex: true, arm_value: 15 },
-    { id: "heavy1", name: "Колечный доспех", dex: false, arm_value: 14 },
-    { id: "heavy2", name: "Кольчуга", dex: false, arm_value: 16 },
-    { id: "heavy3", name: "Наборный доспех", dex: false, arm_value: 17 },
-    { id: "heavy4", name: "Латы", dex: false, arm_value: 18 },
-    { id: "no-armor-barbarian", name: "Без доспехов", dex: false, arm_value: 10+document.getElementById("dex").innerText+document.getElementById("con").innerText },
-    { id: "no-armor-monk", name: "Без доспехов", dex: false, arm_value: 10+document.getElementById("dex").innerText+document.getElementById("wis").innerText },
-    { id: "no-armor", name: "Без доспехов", dex: true, arm_value: 10 },
-
+    { id: "light1", name: "Стёганый доспех", arm_bonus: "dex", arm_value: 11 },
+    { id: "light2", name: "Кожаный доспех", arm_bonus: "dex", arm_value: 11 },
+    { id: "light3", name: "Проклёпанный кожаный доспех", arm_bonus: "dex", arm_value: 12 },
+    { id: "middle1", name: "Шкурный доспех", arm_bonus: "dex", arm_value: 12 },
+    { id: "middle2", name: "Кольчужная рубаха", arm_bonus: "dex", arm_value: 13 },
+    { id: "middle3", name: "Чешуйчатый доспех", arm_bonus: "dex", arm_value: 14 },
+    { id: "middle4", name: "Кираса", arm_bonus: "dex", arm_value: 14 },
+    { id: "middle5", name: "Полулаты", arm_bonus: "dex", arm_value: 15 },
+    { id: "heavy1", name: "Колечный доспех", arm_bonus: null, arm_value: 14 },
+    { id: "heavy2", name: "Кольчуга", arm_bonus: null, arm_value: 16 },
+    { id: "heavy3", name: "Наборный доспех", arm_bonus: null, arm_value: 17 },
+    { id: "heavy4", name: "Латы", arm_bonus: null, arm_value: 18 },
+    { id: "no-armor-barbarian", name: "Без доспехов", arm_bonus: ["dex", "con"], arm_value: 10 },
+    { id: "no-armor-monk", name: "Без доспехов", arm_bonus: ["dex", "wis"], arm_value: 10 },
+    { id: "no-armor", name: "Без доспехов", arm_bonus: "dex", arm_value: 10 }
 ];
 
 const specials = [
@@ -591,6 +590,7 @@ updateData()
 
 
 
+
 // Функция, которая обновляет все данные на экране
 function updateData () {
     displayAbilities ()
@@ -599,8 +599,11 @@ function updateData () {
     updateHealth ()
     updateSavingThrows ()
     removeRedOutlineOnInput()
+    updateArmorSelector(document.getElementById("class").value)
     updatePDF () // Потом убрать??
 }
+
+
 
 
 // let trait_list = [
@@ -742,7 +745,7 @@ function displayAbilities () {
     document.getElementById("int").innerText = `${checkLimit(int,int_bon)}`;
     document.getElementById("str").innerText = `${checkLimit(str,str_bon)}`;
     document.getElementById("wis").innerText = `${checkLimit(wis,wis_bon)}`;
-    document.getElementById("limit").textContent = `${limit}`
+    document.getElementById("limit").textContent = `${limit}`;
 
 }
 
@@ -971,6 +974,9 @@ function updateWeaponChoices(selectedClass) {
     select1.addEventListener('change', updateWeaponDescription);
     select2.addEventListener('change', updateWeaponDescription);
     select3.addEventListener('change', updateWeaponDescription);
+    document.querySelectorAll('.add, .substract').forEach(button => {
+        button.addEventListener('click', updateWeaponDescription)})
+
 
     // Обновляем описание для начальных значений
     updateWeaponDescription();
@@ -1123,7 +1129,10 @@ function updateClassInventory(selectedClass) {
 function updateArmorSelector(selectedClass) {
     // Получаем div, куда будем добавлять селектор брони
     const armorDiv = document.querySelector('.armor-container');
-    
+
+    // Сохраняем текущее выбранное значение брони, если оно есть
+    const previousSelectedArmor = document.querySelector('.armor-select')?.value;
+
     // Очищаем содержимое div перед добавлением новых данных
     armorDiv.innerHTML = '';
 
@@ -1136,13 +1145,13 @@ function updateArmorSelector(selectedClass) {
     // Если у класса нет доступной брони, ничего не делаем
     if (classArmor.length === 0) return;
 
-    // Создаем элемент select
+    // Создаем элемент select для выбора брони
     const armorSelect = document.createElement('select');
     armorSelect.classList.add('armor-select');
 
     // Заполняем select опциями брони
     classArmor.forEach((armorId, index) => {
-        const armorItem = armor_list.find(a => a.id === armorId); // Используем правильное название массива armor_list
+        const armorItem = armor_list.find(a => a.id === armorId);
         if (armorItem) {
             const option = document.createElement('option');
             option.value = armorItem.id;
@@ -1158,17 +1167,42 @@ function updateArmorSelector(selectedClass) {
     // Функция для обновления значения брони
     function updateArmorValue() {
         const selectedArmorId = armorSelect.value;
-        const selectedArmor = armor_list.find(a => a.id === selectedArmorId); // Используем правильное название массива armor_list
+        const selectedArmor = armor_list.find(a => a.id === selectedArmorId);
+
+        // Если броня не найдена, ничего не делаем
+        if (!selectedArmor) {
+            console.error("Броня не найдена.");
+            return;
+        }
+
         let armorValue = selectedArmor.arm_value;
 
-        // Проверяем, добавляется ли модификатор Ловкости
-        if (selectedArmor.dex) {
-            const dexValue = parseInt(document.getElementById("dex").innerText, 10);
-            armorValue += dexValue;
+        // Проверяем наличие arm_bonus (может быть строка или массив)
+        if (selectedArmor.arm_bonus) {
+            if (Array.isArray(selectedArmor.arm_bonus)) {
+                // Если бонус - это массив характеристик (например, "dex" и "con" для варвара)
+                selectedArmor.arm_bonus.forEach(bonus => {
+                    const bonusElement = document.getElementById(bonus);
+                    if (bonusElement) {
+                        armorValue += Number(bonusElement.innerText);
+                    }
+                });
+            } else {
+                // Если бонус - одна характеристика (например, "dex")
+                const bonusElement = document.getElementById(selectedArmor.arm_bonus);
+                if (bonusElement) {
+                    armorValue += Number(bonusElement.innerText);
+                }
+            }
         }
 
         // Обновляем значение брони в элементе с id="armor-value"
         document.getElementById("armor-value").innerText = armorValue;
+    }
+
+    // Восстанавливаем ранее выбранное значение брони
+    if (previousSelectedArmor) {
+        armorSelect.value = previousSelectedArmor;
     }
 
     // Обновляем значение брони при изменении выбора
@@ -1349,12 +1383,12 @@ async function parseClass(event) {
     for (let i = 0; i < savingThrows.length; i++) {
         savingThrows[i].textContent = "";
     }
-    updateWeaponChoices(event.target.value)
+
     updateClassSpecials(event.target.value)
     updateClassCharms(event.target.value)
     updateClassSpells(event.target.value)
     updateClassInventory(event.target.value)
-    updateArmorSelector(event.target.value)
+    updateWeaponChoices(event.target.value)
 
     updateData()
   }
