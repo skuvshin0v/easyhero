@@ -844,7 +844,7 @@ function updateData () {
     updateSavingThrows ()
     removeRedOutlineOnInput()
     updateArmorSelector(document.getElementById("class").value)
-    updatePDF () // Потом убрать??
+    updatePDF()
 }
 
 
@@ -892,8 +892,57 @@ function updatePDF () {
 
     document.getElementById("hits-value").innerText = document.getElementById("hits").innerText;
     document.getElementById("arm-value").innerText = document.getElementById("armor-value").innerText;
+    document.getElementById("initiative-value").innerText = document.getElementById("dex").innerText;
 
-    
+    document.getElementById("str-saving-throw-page").innerText = document.getElementById("str-saving-throw").innerText;
+    document.getElementById("dex-saving-throw-page").innerText = document.getElementById("dex-saving-throw").innerText;
+    document.getElementById("con-saving-throw-page").innerText = document.getElementById("con-saving-throw").innerText;
+    document.getElementById("int-saving-throw-page").innerText = document.getElementById("int-saving-throw").innerText;
+    document.getElementById("wis-saving-throw-page").innerText = document.getElementById("wis-saving-throw").innerText;
+    document.getElementById("cha-saving-throw-page").innerText = document.getElementById("cha-saving-throw").innerText;
+
+    // Перенос содержимого div для специальных способностей
+    const specialsSource = document.getElementById("specials");
+    const specialsPage = document.getElementById("specials-page");
+    specialsPage.innerHTML = specialsSource.innerHTML; // Копируем содержимое
+
+    // Перенос содержимого div для черт расы
+    const traitsSource = document.getElementById("traits");
+    const traitsPage = document.getElementById("traits-page");
+    traitsPage.innerHTML = traitsSource.innerHTML; // Копируем содержимое
+
+    // Перенос содержимого div для заклинаний
+    const spellsSource = document.getElementById("spells");
+    const spellsPage = document.getElementById("spells-page");
+    spellsPage.innerHTML = spellsSource.innerHTML; // Копируем содержимое
+
+    // Перенос содержимого div для заговоров
+    const charmsSource = document.getElementById("charms");
+    const charmsPage = document.getElementById("charms-page");
+    charmsPage.innerHTML = charmsSource.innerHTML; // Копируем содержимое
+
+    // Перенос содержимого div для описания оружия
+    const weaponsSource = document.getElementById("weapons-descriptions");
+    const weaponsPage = document.getElementById("weapons-page");
+    weaponsPage.innerHTML = weaponsSource.innerHTML; // Копируем содержимое
+
+    // Перенос содержимого div для инвентаря
+    const inventorySource = document.querySelector(".inventory-container");
+    const inventoryPage = document.getElementById("inventory-page");
+    inventoryPage.innerHTML = inventorySource.innerHTML; // Копируем содержимое
+
+    // Перенос выбранного значения из селектора брони
+    const armorSelect = document.querySelector("select.armor-select");
+    const armorPage = document.getElementById("armor-page");
+    armorPage.innerHTML = ""; // Очищаем контент div перед вставкой
+
+    if (armorSelect) {
+        const selectedArmor = armorSelect.options[armorSelect.selectedIndex].text; // Получаем текст выбранной опции
+        const armorHeader = document.createElement("h4");
+        armorHeader.textContent = selectedArmor;
+        armorPage.appendChild(armorHeader); // Добавляем выбранную броню как заголовок
+    }
+
 
 }
 
@@ -943,7 +992,7 @@ function generatePDF() {
         // Генерация PDF
         html2pdf().set(options).from(pdfContent).save().then(() => {
             // Скрываем элемент обратно после генерации PDF
-            pdfContent.style.display = "none";
+            // pdfContent.style.display = "none";
         }).catch((error) => {
             console.error("Ошибка при генерации PDF:", error);
             // Скрываем элемент даже в случае ошибки
@@ -1039,7 +1088,7 @@ function updateSavingThrows() {
 function updateHealth () {
     let con_mod = Number(document.getElementById("con").innerText)
     console.log(con_mod)
-    health = hit_die+con_mod+(lvl-1)*(hit_die/2+1+con_mod)
+    health = hit_die+con_mod+(lvl-1)*(hit_die+con_mod)
     document.getElementById("hits").innerText=health
 }
 

@@ -341,7 +341,7 @@ select:focus {
     font-size: 16px;
 }
 
-.specials h4, .weapons h4, .inventory h4, .magic h4, .armor h4 {
+.specials h4, .weapons h4, .inventory h4, .magic h4, .armor h4{
     font-family: "Oswald";
     margin-top: 5px;
     margin-bottom: 5px;
@@ -372,8 +372,7 @@ select:focus {
     "ab-value ab-value"
     "ab-value ab-value"
     "add substract"
-    "saving-throw saving-throw"
-    "skill-list skill-list";
+    "saving-throw saving-throw";
 
 }
 
@@ -426,26 +425,6 @@ select:focus {
     
 }
 
-
-
-.skill-list {
-    grid-area: skill-list;
-    list-style-type: none;
-    margin-left: 0px;
-    margin-right: 0px;
-    padding-inline-start: 0px;
-    /* border: 5px;
-    border-style: solid;
-    border-color: brown; */
-    margin-top: 5px;
-    margin-bottom: 5px;
-    height: 125px;
-    width: 130px;
-    display: none;
-    font-family: "Roboto";
-    font-size: 14px;
-    text-align: center;
-}
 
 
 .saving-throw {
@@ -652,10 +631,25 @@ h1 {
     padding: 15px;
     margin-bottom: 0px;
     background-color: white;
-    background-image: url(img/bg4.jpg);
+    background-image: url(img/background.jpg);
     font-family:'Oswald';
     width: 1750px;
     height: 1240px;
+}
+
+.page h4 {
+    font-family: "Oswald";
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 20px;
+
+}
+
+.page p {
+    font-family: "Roboto";
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 
@@ -675,22 +669,23 @@ h1 {
 #first-page {
     display: grid;
     grid-template-areas:
-    "page-header page-header page-header "
-    "stats-container-page stats-container-page stats-container-page"
-    "specials-container-page specials-container-page  weapons-container-page "
-    "specials-container-page specials-container-page inventory-container-page";
-    grid-template-rows: 100px 200px auto auto;
+    "page-header page-header "
+    "stats-container-page  stats-container-page"
+    "specials-container-page  weapons-container-page "
+    "magic-container-page inventory-container-page";
+    grid-template-rows: 100px 300px auto auto;
+    grid-template-columns: 3fr 1.8fr;
     gap: 10px 20px;
     height: 1240px;
 
 
 }
 
-
 .stats-container-page {
     grid-area: stats-container-page;
     display: grid;
-    grid-template-areas: "abilities abilities health-and-armor ";
+    grid-template-areas: "abilities-page health-and-armor ";
+    grid-template-columns: 2fr 1fr;
     gap: 10px 20px;
 }
 
@@ -703,6 +698,9 @@ h1 {
 }
 
 .container-page-header {
+    font-family: "Oswald";
+    font-size: 30px;
+    margin-bottom: 5px;
     margin-top: 5px;
 
 }
@@ -710,6 +708,10 @@ h1 {
 .specials-container-page {
     grid-area: specials-container-page;
 
+}
+
+#specials-page {
+    display: grid;
 }
 
 .weapons-container-page {
@@ -721,10 +723,9 @@ h1 {
 }
 
 .ab-container-page {
-    grid-area: abilities;
+    grid-area: abilities-page;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
 }
 
 .health-and-armor-container-page {
@@ -732,24 +733,44 @@ h1 {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-
 }
 
 .element-header-page {
     font-size: 20px;
     font-weight: bold;
     text-transform: uppercase;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    grid-area: element-header-page;
 }
 
 .element-container-page {
-    height: 100px;
+    display: grid;
+    grid-template-areas:
+    "element-header-page"
+    "element-value-page"
+    "saving-throw-page"
+    "skill-list";
+    height: 300px;
     align-items: center;
     text-align: center;
     margin: 5px;
+    row-gap: 0px;
+}
+
+.other-element-container-page {
+    display: grid;
+    grid-template-areas:
+    "element-header-page"
+    "element-value-page";
+    height: 180px;
+    align-items: center;
+    text-align: center;
+    margin: 5px;
+    row-gap: 0px;
 }
 
 .element-value-page {
+    grid-area: element-value-page;
     background-image: url(img/award.png);
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -764,10 +785,43 @@ h1 {
 
 }
 
+.saving-throw-page {
+    grid-area: saving-throw-page;
+    height: 20px;
+    font-size: 15px;
+    margin-bottom: 0px;
+    font-family: "Oswald";
+    text-align: center;
+}
+
+.skill-list {
+    grid-area: skill-list;
+    list-style-type: none;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-inline-start: 0px;
+    /* border: 5px;
+    border-style: solid;
+    border-color: brown; */
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 125px;
+    font-family: "Roboto";
+    font-size: 14px;
+    text-align: center;
+    justify-content: center;
+}
+
 #arm-value {
     background-image: url(img/shield.png);
     line-height: 145px;
     color: white;  
+}
+
+#initiative-value {
+    background-image: url(img/award.png);
+    line-height: 160px;
+    color: rgb(0, 0, 0);  
 }
 
 #hits-value {
@@ -782,7 +836,7 @@ h1 {
 
 /* Second page */
 #second-page {
-    display: grid;
+    display: none;
     grid-template-areas:
     "image description";
     grid-template-columns: 1fr 1fr;

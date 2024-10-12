@@ -117,33 +117,20 @@
                         <div id="str" class="ab-value"></div>
                         <button class="add">+</button>
                         <button class="substract">-</button>
-                        <ul class="skill-list">
-                            <li id="skill-athletics">Атлетика</li>
-                        </ul>
                         <div class="saving-throw" id="str-saving-throw"></div>
-
                     </div>
-
                     <div class="ability">
                         <p class="ab-header">Ловкость</p>
                         <div id="dex" class="ab-value"></div>
                         <button class="add">+</button>
                         <button class="substract">-</button>
-                        <ul class="skill-list">
-                            <li id="skill-acrobatics">Акробатика</li>
-                            <li id="skill-stealth">Скрытность</li>
-                            <li id="skill-sleight-of-hand" class="skill-checkbox">Ловкость рук +6</li>
-                        </ul>
                         <div class="saving-throw" id="dex-saving-throw"></div>
                     </div>
-
                     <div class="ability">
                         <p class="ab-header">Выносливость</p>
                         <div id="con" class="ab-value"></div>
                         <button class="add">+</button>
                         <button class="substract">-</button>
-                        <ul class="skill-list">
-                        </ul>
                         <div class="saving-throw" id="con-saving-throw"></div>
                     </div>
 
@@ -152,13 +139,6 @@
                         <div id="int" class="ab-value"></div>
                         <button class="add">+</button>
                         <button class="substract">-</button>
-                        <ul class="skill-list">
-                            <li id="skill-history">История</li>
-                            <li id="skill-arcana">Магия</li>
-                            <li id="skill-nature">Природа</li>
-                            <li id="skill-investigation">Расследование</li>
-                            <li id="skill-religion">Религия</li>
-                        </ul>
                         <div class="saving-throw" id="int-saving-throw"></div>
                     </div>
 
@@ -167,27 +147,13 @@
                         <div id="cha" class="ab-value"></div>
                         <button class="add">+</button>
                         <button class="substract">-</button>
-                        <ul class="skill-list">
-                            <li id="skill-intimidation">Запугивание</li>
-                            <li id="skill-performance">Исполнение</li>
-                            <li id="skill-deception">Обман</li>
-                            <li id="skill-persuasion">Убеждение</li>
-                        </ul>
                         <div class="saving-throw" id="cha-saving-throw"></div>
                     </div>
-
                     <div class="ability">
                         <p class="ab-header">Мудрость</p>
                         <div id="wis" class="ab-value"></div>
                         <button class="add">+</button>
                         <button class="substract">-</button>
-                        <ul class="skill-list">
-                            <li id="skill-perception">Внимание</li>
-                            <li id="skill-survival">Выживание</li>
-                            <li id="skill-animal-handling">Дрессировка</li>
-                            <li id="skill-medicine">Медицина</li>
-                            <li id="skill-insight">Проницательность</li>
-                        </ul>
                         <div class="saving-throw" id="wis-saving-throw"></div>
                     </div>
     
@@ -204,7 +170,7 @@
                 <div class="weapons-container">
                     <div class="weapons-choice">
                     </div>
-                    <div class="weapons-descriptions">
+                    <div class="weapons-descriptions" id="weapons-descriptions">
                         Здесь появятся опции оружия, в зависимости от выбранного класса
                     </div>
                 </div>
@@ -224,7 +190,6 @@
                 </div>
                 <div class="inventory-container">
                     Здесь будет ваш инветарь
-                    <!--Тут будет выбор инвентаря-->
                 </div>
             </div>
             <div class="specials">
@@ -274,6 +239,10 @@
                             <div class="element-value-page" id="str-page">
                                 0
                             </div>
+                            <div class="saving-throw-page" id="str-saving-throw-page">Спасбросок +7</div>
+                            <ul class="skill-list">
+                                <li id="skill-athletics">Атлетика</li>
+                            </ul>
                         </div>
                         <div class="element-container-page">
                             <div class="element-header-page"> Ловкость
@@ -281,6 +250,12 @@
                             <div class="element-value-page" id="dex-page">
                                 +1
                             </div>
+                            <div class="saving-throw-page" id="dex-saving-throw-page">Спасбросок +7</div>
+                            <ul class="skill-list">
+                                <li id="skill-acrobatics">Акробатика</li>
+                                <li id="skill-stealth">Скрытность</li>
+                                <li id="skill-sleight-of-hand" class="skill-checkbox">Ловкость рук +6</li>
+                            </ul>
                         </div>
                         <div class="element-container-page">
                             <div class="element-header-page"> Выносливость
@@ -288,6 +263,9 @@
                             <div class="element-value-page" id="con-page">
                                 -3
                             </div>
+                            <ul class="skill-list">
+                            </ul>
+                            <div class="saving-throw-page" id="con-saving-throw-page"></div>
                         </div>
                         <div class="element-container-page">
                             <div class="element-header-page"> Интеллект
@@ -295,6 +273,14 @@
                             <div class="element-value-page" id="int-page">
                                 0
                             </div>
+                            <ul class="skill-list">
+                                <li id="skill-history">История</li>
+                                <li id="skill-arcana">Магия</li>
+                                <li id="skill-nature">Природа</li>
+                                <li id="skill-investigation">Расследование</li>
+                                <li id="skill-religion">Религия</li>
+                            </ul>
+                            <div class="saving-throw-page" id="int-saving-throw-page"></div>
                         </div>
                         <div class="element-container-page">
                             <div class="element-header-page"> Харизма
@@ -302,6 +288,13 @@
                             <div class="element-value-page" id="cha-page">
                                 0
                             </div>
+                            <ul class="skill-list">
+                                <li id="skill-intimidation">Запугивание</li>
+                                <li id="skill-performance">Исполнение</li>
+                                <li id="skill-deception">Обман</li>
+                                <li id="skill-persuasion">Убеждение</li>
+                            </ul>
+                            <div class="saving-throw-page" id="cha-saving-throw-page"></div>
                         </div>
                         <div class="element-container-page">
                             <div class="element-header-page"> Мудрость
@@ -309,11 +302,26 @@
                             <div class="element-value-page" id="wis-page">
                                 0
                             </div>
+                            <ul class="skill-list">
+                                <li id="skill-perception">Внимание</li>
+                                <li id="skill-survival">Выживание</li>
+                                <li id="skill-animal-handling">Дрессировка</li>
+                                <li id="skill-medicine">Медицина</li>
+                                <li id="skill-insight">Проницательность +7</li>
+                            </ul>
+                            <div class="saving-throw-page" id="wis-saving-throw-page"></div>
                         </div>
                     </div>
                     <div class="health-and-armor-container-page">
+                        <div class="other-element-container-page">
+                            <div class="element-header-page">Инициатива
+                            </div>
+                            <div class="element-value-page" id="initiative-value">
+                                +3
+                            </div>
+                        </div>
 
-                        <div class="element-container-page">
+                        <div class="other-element-container-page">
                             <div class="element-header-page"> Броня
                             </div>
                             <div class="element-value-page" id="arm-value">
@@ -321,7 +329,7 @@
                             </div>
                         </div>
 
-                        <div class="element-container-page">
+                        <div class="other-element-container-page">
                             <div class="element-header-page" > Здоровье
                             </div>
                             <div class="element-value-page" id="hits-value">
@@ -329,7 +337,7 @@
                             </div>
                         </div>
 
-                        <div class="element-container-page">
+                        <div class="other-element-container-page">
                             <div class="element-header-page"> Текущее
                             </div>
                             <div class="element-value-page" id="cur-hits-value">
@@ -342,22 +350,31 @@
 
                 </div>
                 <div class="specials-container-page text-container-page">
-                    <h3 class="container-page-header">Способности и магия</h3>
-                    <div class="container-page-text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam nihil nemo est corporis perferendis natus architecto harum consequuntur non perspiciatis?
+                    <h3 class="container-page-header">Способности</h3>
+                    <div id="specials-page">
+                    </div>
+                    <div id="traits-page">
+                    </div>
+                </div>
+                <div class="magic-container-page text-container-page">
+                    <h3 class="container-page-header">Магия</h3>
+                    <div id="spells-page">
+                    </div>
+                    <div id="charms-page">
                     </div>
                 </div>
                 <div class="weapons-container-page text-container-page">
                     <h3 class="container-page-header">Оружие</h3>
-                    <div class="container-page-text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam nihil nemo est corporis perferendis natus architecto harum consequuntur non perspiciatis?
+                    <div id="weapons-page">
                     </div>
                 </div>
                 <div class="inventory-container-page text-container-page">
                     <h3 class="container-page-header">Инвентарь</h3>
-                    <div class="container-page-text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam nihil nemo est corporis perferendis natus architecto harum consequuntur non perspiciatis?
+                    <div id="inventory-page">
                     </div>
+                    <div id="armor-page">
+                    </div>
+
 
                 </div>
 
