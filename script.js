@@ -1025,7 +1025,7 @@ function generatePDF() {
         // Генерация PDF
         html2pdf().set(options).from(pdfContent).save().then(() => {
             // Скрываем элемент обратно после генерации PDF
-            // pdfContent.style.display = "none";
+            pdfContent.style.display = "none";
         }).catch((error) => {
             console.error("Ошибка при генерации PDF:", error);
             // Скрываем элемент даже в случае ошибки
@@ -1732,5 +1732,8 @@ async function parseClass(event) {
 
         // Читаем изображение как Data URL (base64)
         reader.readAsDataURL(input.files[0]);
+        document.getElementById("img-label").innerText = "Изображение загружено";
+        document.getElementById("img-label").style.background = "#515151";
+        console.log("Img saved")
     }
 }
