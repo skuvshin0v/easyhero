@@ -895,6 +895,55 @@ h1 {
     grid-area: notes;
 }
 
+footer {
+    background-color: #4D3F37;
+    font-family: 'Roboto';
+    padding: 15px;
+    align-items: center;
+    margin-left: -10px;
+    margin-right: -10px;
+    margin-bottom: -30px;
+    margin-top: 20px;
+    color: #F9E8DE;
+
+}
+
+.footer-list li {
+    list-style: none;
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: 5px;
+
+}
+
+.footer-list {
+    font-family: "Roboto";
+    text-align: center;
+    padding:0px;
+    justify-content: space-around;
+    
+}
+
+.footer-list a {
+    color: #F9E8DE;
+    text-decoration: none;
+}
+
+.footer-list a:hover {
+    color: #CC5803;
+    text-decoration: none;
+}
+
+.copyright {
+    font-family: "Roboto";
+    text-align: center;
+
+}
+
+.copyright a{
+    color: #CC5803;
+}
+
 /* Адаптивная верстка */
 
 @media (max-width: 768px) {
