@@ -53,7 +53,7 @@
                     </div>
                     <div class="char-img">
                         <label for="char-img" class="img-label">Загрузите изображение</label>
-                        <input type="file" id="char-img" accept="image/png, image/jpeg" >
+                        <input type="file" id="char-img" accept="image/png, image/jpeg" onchange="updateImage()" >
                     </div>
                     <div class="race">
                         <div class="input-label">Раса</div>
@@ -101,7 +101,7 @@
                     </div>
                     <div class="char-story">
                         <label for="char-story" class="input-story-label">Предыстория</label>
-                        <textarea name="char-story" id="char-story" rows="4" cols="50" placeholder="Напишите короткую предысторию своего персонажа"></textarea>
+                        <textarea name="char-story" id="char-story" rows="4" cols="50" maxlength="2500" placeholder="Напишите короткую предысторию своего персонажа"></textarea>
                     </div>
                 </div>
 
@@ -353,16 +353,12 @@
                     <h3 class="container-page-header">Способности</h3>
                     <div id="specials-page">
                     </div>
+                    <div id="charms-page">
+                    </div>
                     <div id="traits-page">
                     </div>
                 </div>
-                <div class="magic-container-page text-container-page">
-                    <h3 class="container-page-header">Магия</h3>
-                    <div id="spells-page">
-                    </div>
-                    <div id="charms-page">
-                    </div>
-                </div>
+
                 <div class="weapons-container-page text-container-page">
                     <h3 class="container-page-header">Оружие</h3>
                     <div id="weapons-page">
@@ -383,9 +379,19 @@
 
             </div>
             <div id="second-page" class="page">
-                <img src="img/wizard.png" id="image-on-page">
-                <div id="description-on-page"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus ipsam similique quo qui aperiam. Excepturi, recusandae eius ad necessitatibus incidunt deleniti quos libero facere sed doloremque, quisquam odio, blanditiis nihil illum eligendi? Architecto praesentium molestias aspernatur modi minus deleniti, magnam voluptate, odio quae eaque accusantium exercitationem, sit expedita unde assumenda omnis. Quas nisi, nostrum fugit iusto unde, similique a laboriosam aut beatae ipsa dolorem, mollitia autem obcaecati. Natus voluptates corrupti vitae quo ipsam neque officiis quam. Error architecto fugit sed labore autem nemo nobis sint reprehenderit dolores animi nisi natus quae odit repellat amet, ducimus voluptate veritatis pariatur accusantium deserunt.</div>
-                
+                <img src="img/characters/default-character.jpg" id="image-on-page">
+                <div id="description-on-page" class="text-container-page"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus ipsam similique quo qui aperiam. Excepturi, recusandae eius ad necessitatibus incidunt deleniti quos libero facere sed doloremque, quisquam odio, blanditiis nihil illum eligendi? Architecto praesentium molestias aspernatur modi minus deleniti, magnam voluptate, odio quae eaque accusantium exercitationem, sit expedita unde assumenda omnis. Quas nisi, nostrum fugit iusto unde, similique a laboriosam aut beatae ipsa dolorem, mollitia autem obcaecati. Natus voluptates corrupti vitae quo ipsam neque officiis quam. Error architecto fugit sed labore autem nemo nobis sint reprehenderit dolores animi nisi natus quae odit repellat amet, ducimus voluptate veritatis pariatur accusantium deserunt.</div>
+            </div>
+            <div id="magic-page" class="page">
+                <div class="magic-container-page text-container-page">
+                    <h3 class="container-page-header">Магия (У вас 5 зарядов на день)</h3>
+                    <div id="spells-page">
+                    </div>
+                </div>
+                <div class="text-container-page" id="notes">
+                    <h3 class="container-page-header">Заметки</h3>
+                </div>
+
             </div>
 
         </section>

@@ -561,7 +561,7 @@ const spells = [
     },
     {
         id: "bane",
-        name: "Порча",
+        name: "Порча (1 заряд)",
         description: "До трёх существ в пределах 30 футов должны пройти спасбросок Харизмы. Если они проваливают его, то в течение 1 минуты (при концентрации) вычитают 1к4 из бросков атаки и спасбросков"
     },
     {
@@ -943,6 +943,14 @@ function updatePDF () {
         armorPage.appendChild(armorHeader); // Добавляем выбранную броню как заголовок
     }
 
+    const storyText = document.getElementById("char-story").value;
+
+    // Находим div, в который нужно вставить текст
+    const descriptionDiv = document.getElementById("description-on-page");
+
+    // Вставляем текст в div
+    descriptionDiv.innerText = storyText;
+
 
 }
 
@@ -969,6 +977,31 @@ function generatePDF() {
 
     // Если все поля заполнены, продолжаем генерацию PDF
     updatePDF();
+
+    function updateImageWithFallback() {
+        const input = document.getElementById('char-img');
+        const img = document.getElementById('image-on-page');
+    
+        // Проверяем, был ли загружен файл
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+    
+            // После загрузки файла, меняем src изображения
+            reader.onload = function(e) {
+                img.src = e.target.result; // Устанавливаем src как данные загруженного изображения
+            }
+    
+            // Читаем изображение как Data URL (base64)
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            // Если файл не был загружен, использовать изображение по умолчанию
+            img.src = `img/characters/default-character.jpg`; // Путь к изображению по умолчанию
+            // на будущее img.src = `img/characters/${document.getElementById("race").options[document.getElementById("race").selectedIndex].text}-${document.getElementById("class").options[document.getElementById("class").selectedIndex].text}.jpg`; 
+
+        }
+    }
+
+    updateImageWithFallback()
     const pdfContent = document.getElementById('pdf-content');
 
     // Временно отображаем элемент для генерации PDF
@@ -980,11 +1013,11 @@ function generatePDF() {
         const options = {
             margin: 0,
             filename: `${document.getElementById("char-name-page").innerText}.pdf`,
-            image: { type: 'jpeg', quality: 0.75 }, // Уменьшаем качество изображения
+            image: { type: 'jpeg', quality: 0.9 }, // Уменьшаем качество изображения
             html2canvas: { scale: 1 }, // Уменьшаем масштаб для меньшего разрешения
             jsPDF: {
                 unit: 'px',
-                format: [1750, 1240], // Уменьшаем размер страницы (A4 в пикселях, но меньше)
+                format: [1750, 1240],
                 orientation: 'landscape'
             }
         };
@@ -1683,3 +1716,21 @@ async function parseClass(event) {
     updateData()
   }
 
+
+  function updateImage() {
+    const input = document.getElementById('char-img');
+    const img = document.getElementById('image-on-page');
+
+    // Проверяем, выбрано ли изображение
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+
+        // После загрузки файла, меняем src изображения
+        reader.onload = function(e) {
+            img.src = e.target.result; // Устанавливаем src как данные загруженного изображения
+        }
+
+        // Читаем изображение как Data URL (base64)
+        reader.readAsDataURL(input.files[0]);
+    }
+}

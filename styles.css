@@ -18,7 +18,7 @@ p {
   }
 
 
-  #pdf-content {
+#pdf-content {
     display: none;
 } 
 
@@ -648,8 +648,8 @@ h1 {
 .page p {
     font-family: "Roboto";
     font-size: 14px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 
@@ -669,15 +669,20 @@ h1 {
 #first-page {
     display: grid;
     grid-template-areas:
-    "page-header page-header "
-    "stats-container-page  stats-container-page"
-    "specials-container-page  weapons-container-page "
-    "magic-container-page inventory-container-page";
+    "page-header page-header"
+    "stats-container-page stats-container-page"
+    "specials-container-page weapons-container-page"
+    "specials-container-page inventory-container-page";
     grid-template-rows: 100px 300px auto auto;
-    grid-template-columns: 3fr 1.8fr;
+    grid-template-columns: 2fr 1fr;
     gap: 10px 20px;
     height: 1240px;
 
+
+}
+
+#first-page select {
+    display: none;
 
 }
 
@@ -695,6 +700,10 @@ h1 {
     border: solid;
     border-width: 5px;
     border-radius: 10px;
+    position: relative;
+    z-index: 1;
+    backdrop-filter: blur(5px); /* The amount of blur in pixels */
+    background-color: rgba(255, 255, 255, 0.083); /* Optional: a semi-transparent background to enhance the blur effect */
 }
 
 .container-page-header {
@@ -712,6 +721,14 @@ h1 {
 
 #specials-page {
     display: grid;
+}
+
+.magic-container-page {
+    grid-area: magic-container-page;
+}
+
+.charms-container-page {
+    grid-area: charms-container-page;
 }
 
 .weapons-container-page {
@@ -755,6 +772,11 @@ h1 {
     text-align: center;
     margin: 5px;
     row-gap: 0px;
+    position: relative;
+    z-index: 1;
+    backdrop-filter: blur(5px); /* The amount of blur in pixels */
+    background-color: rgba(255, 255, 255, 0.083); /* Optional: a semi-transparent background to enhance the blur effect */
+    border-radius: 5px;
 }
 
 .other-element-container-page {
@@ -805,7 +827,7 @@ h1 {
     border-color: brown; */
     margin-top: 5px;
     margin-bottom: 5px;
-    height: 125px;
+    height: 85px;
     font-family: "Roboto";
     font-size: 14px;
     text-align: center;
@@ -836,7 +858,7 @@ h1 {
 
 /* Second page */
 #second-page {
-    display: none;
+    display: grid;
     grid-template-areas:
     "image description";
     grid-template-columns: 1fr 1fr;
@@ -846,11 +868,31 @@ h1 {
 #image-on-page {
     grid-area: image;
     margin-left: 0px;
-    margin-right: 100px;
+    margin-right: 0px;
+    padding: 10px;
+    align-self: center;
+    justify-self: center;
+    max-width: 850px;
 }
 
 #description-on-page {
     grid-area: description;
+    font-size: 20px;
+}
+
+
+#magic-page {
+    display: grid;
+    grid-template-areas:
+    "magic-container-page"
+    "notes";
+    row-gap: 10px;
+    grid-template-rows: 1fr 6fr;
+}
+
+
+#notes {
+    grid-area: notes;
 }
 
 /* Адаптивная верстка */
