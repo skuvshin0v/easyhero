@@ -664,8 +664,9 @@ h1 {
     "page-header page-header"
     "stats-container-page stats-container-page"
     "specials-container-page weapons-container-page"
-    "specials-container-page inventory-container-page";
-    grid-template-rows: 100px 300px auto auto;
+    "specials-container-page inventory-container-page"
+    "page-footer page-footer";
+    grid-template-rows: 100px 300px auto auto 15px;
     grid-template-columns: 2fr 1fr;
     gap: 10px 20px;
     height: 1240px;
@@ -885,6 +886,16 @@ h1 {
 
 #notes {
     grid-area: notes;
+}
+
+.page-footer {
+    grid-area: page-footer;
+    font-family: 'Roboto';
+    font-size: 15px;
+    color: #4D3F37;
+    text-align: center;
+    height: 15px ;
+    margin: 0px;
 }
 
 footer {
