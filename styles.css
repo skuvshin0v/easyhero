@@ -327,14 +327,6 @@ select:focus {
     font-size: 16px;
 }
 
-.magic-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-
-}
-
 .armor {
     grid-area: armor;
     font-family: "Roboto";

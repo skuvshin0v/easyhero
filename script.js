@@ -854,6 +854,7 @@ function updateData () {
 
 //                 "dwarven-combat-training",
 //                 "tool-proficiency",
+//                  "skill-versatility"
 
 
 
@@ -950,6 +951,8 @@ function updatePDF () {
 
     // Вставляем текст в div
     descriptionDiv.innerText = storyText;
+    
+    updateSkillValues(classSelector.value)
 
 
 }
@@ -1272,14 +1275,25 @@ function updateWeaponChoices(selectedClass) {
                 weaponsDescriptionsDiv.appendChild(weaponTitle);
 
                 // Рассчитываем бонус к атаке и урон
-                const baseCharValue = document.getElementById(weapon.base_char).innerText;
-                const attackBonus = prof_bon + Number(baseCharValue);
-                const damage = `${weapon.hit_die} + ${Number(baseCharValue)}`;
+                let baseCharValue = document.getElementById(weapon.base_char).innerText;
+                let attackBonus = prof_bon + Number(baseCharValue);
+                if (attackBonus>=0) {
+                    attackBonus = `+${attackBonus}`
+                }
+
+                if (baseCharValue >=0) {
+                    baseCharValue = `+${Number(baseCharValue)}`
+                }
+
+                
+                let damage = `${weapon.hit_die} ${baseCharValue}`;
+
+
 
                 // Создаем div для бонуса атаки и урона
                 const attackBonusDiv = document.createElement('div');
                 attackBonusDiv.classList.add('attack-bonus');
-                attackBonusDiv.textContent = `Атака +${attackBonus}, урон ${damage}`;
+                attackBonusDiv.textContent = `Атака ${attackBonus}, урон ${damage}`;
                 weaponsDescriptionsDiv.appendChild(attackBonusDiv);
 
                 // Если есть описание, добавляем p
@@ -1460,7 +1474,12 @@ function updateArmorSelector(selectedClass) {
     armorDiv.innerHTML = '';
 
     // Проверяем, выбран ли класс и существует ли он в class_properties
-    if (!selectedClass || !class_properties[selectedClass]) return;
+    if (!selectedClass || !class_properties[selectedClass]) {
+        const zag = document.createElement("p");
+        zag.innerText = "Здесь появится доступная выбранному классу броня";
+        armorDiv.appendChild(zag);
+        return;
+    }
 
     // Получаем список id брони для выбранного класса
     const classArmor = class_properties[selectedClass].armor;
@@ -1472,6 +1491,8 @@ function updateArmorSelector(selectedClass) {
     const armorSelect = document.createElement('select');
     armorSelect.classList.add('armor-select');
 
+    let isPreviousArmorAvailable = false; // Флаг, указывающий на то, доступно ли предыдущее значение
+
     // Заполняем select опциями брони
     classArmor.forEach((armorId, index) => {
         const armorItem = armor_list.find(a => a.id === armorId);
@@ -1479,10 +1500,26 @@ function updateArmorSelector(selectedClass) {
             const option = document.createElement('option');
             option.value = armorItem.id;
             option.textContent = armorItem.name;
-            if (index === 0) option.selected = true; // Первая опция по умолчанию
+
+            // Проверяем, если текущее значение совпадает с предыдущим выбором
+            if (previousSelectedArmor && previousSelectedArmor === armorItem.id) {
+                option.selected = true;
+                isPreviousArmorAvailable = true; // Предыдущее значение доступно в списке
+            }
+
+            // Если это первая опция и нет предыдущего выбора, выбираем её
+            if (index === 0 && !previousSelectedArmor) {
+                option.selected = true;
+            }
+
             armorSelect.appendChild(option);
         }
     });
+
+    // Если предыдущий выбор недоступен, выбираем первую опцию по умолчанию
+    if (!isPreviousArmorAvailable && armorSelect.options.length > 0) {
+        armorSelect.options[0].selected = true;
+    }
 
     // Добавляем select в div
     armorDiv.appendChild(armorSelect);
@@ -1521,11 +1558,6 @@ function updateArmorSelector(selectedClass) {
 
         // Обновляем значение брони в элементе с id="armor-value"
         document.getElementById("armor-value").innerText = armorValue;
-    }
-
-    // Восстанавливаем ранее выбранное значение брони
-    if (previousSelectedArmor) {
-        armorSelect.value = previousSelectedArmor;
     }
 
     // Обновляем значение брони при изменении выбора
@@ -1736,4 +1768,36 @@ async function parseClass(event) {
         document.getElementById("img-label").style.background = "#515151";
         console.log("Img saved")
     }
+}
+
+function updateSkillValues(selectedClass) {
+    // Проверяем, выбран ли класс и существует ли он в свойствах
+    if (!selectedClass || !class_properties[selectedClass]) return;
+
+    // Получаем список навыков для выбранного класса
+    const classSkills = class_properties[selectedClass].skills;
+
+    // Получаем все элементы навыков по id, которые начинаются со 'skill'
+    const skillElements = document.querySelectorAll("[id^='skill']");
+
+    // Перебираем все навыки
+    skillElements.forEach(skillElement => {
+        // Получаем значение ближайшего div с классом element-value-page
+        const elementValueDiv = skillElement.closest('.element-container-page').querySelector('.element-value-page');
+        let skillValue = parseInt(elementValueDiv.textContent);
+
+        // Проверяем, если id навыка в списке навыков класса
+        const skillId = skillElement.id;
+        if (classSkills.includes(skillId)) {
+            // Добавляем значение глобальной переменной prof_bon
+            skillValue += prof_bon;
+        }
+
+        if (skillValue>=0) {
+            skillValue=`+${skillValue}`
+        }
+
+        // Обновляем текст элемента навыка
+        skillElement.textContent = `${skillElement.textContent.split(' ')[0]} ${skillValue}`;
+    });
 }
