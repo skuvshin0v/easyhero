@@ -1072,8 +1072,11 @@ function generatePDF() {
             reader.readAsDataURL(input.files[0]);
         } else {
             // Если файл не был загружен, использовать изображение по умолчанию
-            img.src = `img/characters/default-character.jpg`; // Путь к изображению по умолчанию
-            // на будущее img.src = `img/characters/${document.getElementById("race").options[document.getElementById("race").selectedIndex].text}-${document.getElementById("class").options[document.getElementById("class").selectedIndex].text}.jpg`; 
+            console.log("Generating image")
+            // img.src = `img/characters/default-character.jpg`; // Путь к изображению по умолчанию
+            let source = `img/characters/male/${document.getElementById("race").options[document.getElementById("race").selectedIndex].text}-${document.getElementById("class").options[document.getElementById("class").selectedIndex].text}.jpg`
+            console.log(source)
+            img.src = source; 
 
         }
     }
@@ -1089,7 +1092,7 @@ function generatePDF() {
         // Настройка кастомного размера страницы в PDF
         const options = {
             margin: 0,
-            filename: `${document.getElementById("char-name-page").innerText}.pdf`,
+            filename: `${document.getElementById("char-name-page").innerText} - easyhero.online | Лист персонажа.pdf`,
             image: { type: 'jpeg', quality: 0.9 }, // Уменьшаем качество изображения
             html2canvas: { scale: 1 }, // Уменьшаем масштаб для меньшего разрешения
             jsPDF: {
