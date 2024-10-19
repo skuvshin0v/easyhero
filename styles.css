@@ -2,6 +2,7 @@
 @import url(https://fonts.googleapis.com/css?family=Oswald);
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 
+
 /* Apply box-sizing to all elements */
 * {
     box-sizing: border-box;
@@ -59,8 +60,6 @@ p {
 .input-label {
     color: #1A1512;
     font-family: 'Roboto';
-    font-weight: bold;
-
 }
 
 
@@ -194,7 +193,6 @@ select:focus {
 .input-story-label {
     color: #1A1512;
     font-family: 'Roboto';
-    font-weight: bold;
 }
 
 
@@ -501,7 +499,6 @@ body {
     color: #F9E8DE;
     text-decoration: none;
     font-size: 18px;
-    font-weight: bold;
     margin-right: 25px;
     padding-left: 15px;
     padding-right: 15px;
@@ -558,7 +555,6 @@ body {
 @media (max-width:1200px) {
     .navbar-list a {
         font-size: 15px;
-        font-weight: bold;
         margin-right: 15px;
         text-transform: uppercase;
         border-radius: 3px;
@@ -610,7 +606,6 @@ h1 {
 .section-header{
     font-family: "Oswald";
     color: #1A1512;
-    font-weight: bold;
     font-size: 25px;
     margin-bottom: 10px;
     margin-top: 10px;
@@ -747,7 +742,6 @@ h1 {
 
 .element-header-page {
     font-size: 20px;
-    font-weight: bold;
     text-transform: uppercase;
     margin-bottom: 5px;
     grid-area: element-header-page;
@@ -796,7 +790,6 @@ h1 {
     line-height: 160px;
     font-size: 45px;
     color: rgb(0, 0, 0);
-    font-weight: bold;
 
 }
 
@@ -984,3 +977,111 @@ footer {
         grid-template-columns: 1fr 1fr;
 
 }}
+
+
+/* Masters page */
+.faq {
+    margin: 20px 0;
+}
+
+.faq-item {
+    margin: 10px 0;
+}
+
+.faq-question {
+    background-color: #4D3F37;
+    color: #F9E8DE;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    border-radius: 10px;
+    font-size: 20px;
+    font-family: "Oswald";
+}
+
+.faq-answer {
+    display: none; /* Скрываем ответ по умолчанию */
+    padding: 10px;
+    background-color: #F9E8DE;
+    border: 1px solid #4D3F37;
+    border-radius: 10px;
+    margin-top: 5px;
+    color: #1A1512;
+
+}
+
+.faq h2, .gallery h2 {
+    font-family: "Oswald";
+    font-size: 25px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+
+}
+
+
+.gallery {
+    padding: 20px;
+    text-align: center;
+}
+
+.gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.character-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px;
+    width: 250px; /* или 100% для мобильной версии */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.character-card:hover {
+    transform: scale(1.05);
+}
+
+.character-image {
+    width: 100%;
+    height: auto; /* Обеспечивает адаптивность изображения */
+}
+
+.character-name {
+    font-family: 'Oswald';
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.character-race,
+.character-class,
+.character-story {
+    font-size: 0.9em;
+    margin: 5px 0;
+}
+
+.download-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #CC5803;
+    color: #F9E8DE;
+    text-decoration: none;
+    border-radius: 4px;
+    font-family: 'Roboto';
+}
+
+.download-button:hover {
+    background-color: #cc5703d4;
+}
+
+@media (max-width: 600px) {
+    .character-card {
+        width: 100%; /* Полная ширина на мобильных устройствах */
+    }
+}
+  
